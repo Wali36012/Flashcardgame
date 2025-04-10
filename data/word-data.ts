@@ -1770,4 +1770,1604 @@ export const wordData = [
     example: "The creature’s gaze was amaurotic—but it saw in ways they couldn’t fathom.",
     category: "Entropy, Mutation, Ritual & Beyond"
   },
+  {
+    id: 221,
+    word: "Stagnant",
+    type: "adj",
+    definition: "Still, unmoving, and often foul-smelling",
+    example: "Stagnant pools of coolant reflected the emergency lights like dying stars.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 222,
+    word: "Slack-skinned",
+    type: "adj",
+    definition: "Loose, hanging skin suggesting age or sickness",
+    example: "The slack-skinned corpse smiled as it opened one eye.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 223,
+    word: "Half-lit",
+    type: "adj",
+    definition: "Partially illuminated; dim or obscured",
+    example: "The half-lit chamber flickered between memory and nightmare.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 224,
+    word: "Threading",
+    type: "adj/verb",
+    definition: "Moving carefully and sinuously, like through a narrow space",
+    example: "They were threading through cables and fungus, every step a whisper.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 225,
+    word: "Spasming",
+    type: "adj/verb",
+    definition: "Jerking or convulsing involuntarily",
+    example: "The spasming creature gave off sparks with each tremor.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 226,
+    word: "Splanchnic",
+    type: "adj",
+    definition: "Relating to the internal organs, especially viscera",
+    example: "The creature’s splanchnic cavity bulged with something writhing inside.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 227,
+    word: "Karyotic",
+    type: "adj",
+    definition: "Relating to the cell nucleus (implying genetic manipulation)",
+    example: "The karyotic drift in their blood proved they’d been altered.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 228,
+    word: "Vitelline",
+    type: "adj",
+    definition: "Egg-yolk colored; soft and embryonic",
+    example: "Vitelline fluid leaked from the burst sac, coating the floor in slime.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 229,
+    word: "Rhizomatic",
+    type: "adj",
+    definition: "Spreading like roots; decentralized and uncontrollable",
+    example: "The rhizomatic growth overtook the train, pulsing with will.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 230,
+    word: "Clastic",
+    type: "adj",
+    definition: "Composed of broken pieces; fragmented",
+    example: "The structure was clastic—shattered, then reassembled by something blind.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 231,
+    word: "Agonal",
+    type: "adj",
+    definition: "Related to the moments of death; death throes",
+    example: "The air was thick with the agonal spasms of a dying system.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 232,
+    word: "Mycelial",
+    type: "adj",
+    definition: "Related to fungal threads; interconnected underground networks",
+    example: "They moved within a mycelial labyrinth of spore-choked corridors.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 233,
+    word: "Abreaction",
+    type: "noun",
+    definition: "The purging of unconscious emotion by reliving trauma",
+    example: "Casimir’s breakdown was more than fear—it was abreaction turned psychic.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 234,
+    word: "Chorionic",
+    type: "adj",
+    definition: "Related to the outer fetal membrane",
+    example: "The walls were chorionic—soft, veined, breathing with expectant life.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 235,
+    word: "Hemorrhagic",
+    type: "adj",
+    definition: "Causing or involving heavy bleeding",
+    example: "The explosion caused a hemorrhagic cascade through the lower deck.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 236,
+    word: "Marmoreal",
+    type: "adj",
+    definition: "Cold and marble-like",
+    example: "The corpses lay in marmoreal stillness, like statues of agony.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 237,
+    word: "Catoptromantic",
+    type: "adj",
+    definition: "Using mirrors in divination",
+    example: "The control room was arranged catoptromantically, reflecting impossible things.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 238,
+    word: "Enucleate",
+    type: "verb",
+    definition: "To remove the eye (or center) of something",
+    example: "They enucleated the drones and replaced them with targeting modules.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 239,
+    word: "Pernicious",
+    type: "adj",
+    definition: "Subtly but fatally harmful",
+    example: "The virus was pernicious—dormant for days, then instantly catastrophic.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 240,
+    word: "Obliquity",
+    type: "noun",
+    definition: "Deviation from moral or proper behavior",
+    example: "The project’s goal had slid into total obliquity long ago.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 241,
+    word: "Psionogenic",
+    type: "adj",
+    definition: "Inducing or created by psychic phenomena",
+    example: "The crystal had psionogenic properties—it fed on thought.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 242,
+    word: "Bilharzial",
+    type: "adj",
+    definition: "Infested with parasites",
+    example: "The water was bilharzial, alive with things that didn’t belong.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 243,
+    word: "Spoliated",
+    type: "adj/verb",
+    definition: "Stripped of value or sacredness",
+    example: "The shrine had been spoliated—its relics defiled for research.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 244,
+    word: "Revenant",
+    type: "noun",
+    definition: "One who returns from the dead",
+    example: "He was a revenant now—half-man, half-memory, fully lost.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 245,
+    word: "Crepuscular",
+    type: "adj",
+    definition: "Dim, twilight-dwelling; active at dusk",
+    example: "Crepuscular creatures moved in the half-light, feeding in silence.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 246,
+    word: "Mutiliform",
+    type: "adj",
+    definition: "Existing in many grotesque forms",
+    example: "The biomass was mutiliform, shifting with every breath.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 247,
+    word: "Lobotomized",
+    type: "adj",
+    definition: "Rendered passive or emotionless",
+    example: "The soldiers had been lobotomized—obedient, hollow-eyed, no longer human.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 248,
+    word: "Charred",
+    type: "adj",
+    definition: "Burned black or scorched",
+    example: "Charred bones littered the platform, fused with armor and ash.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 249,
+    word: "Terminus",
+    type: "noun",
+    definition: "The final point or end",
+    example: "This was the terminus—no exits, no comms, just silence and void.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 250,
+    word: "Mnestic",
+    type: "adj",
+    definition: "Related to memory",
+    example: "He injected the mnestic serum and remembered every scream at once.",
+    category: "Biomech, Infection, Ritual, and Collapse"
+  },
+  {
+    id: 251,
+    word: "Nyctophobic",
+    type: "adj",
+    definition: "Afraid of the dark",
+    example: "Even the hardened scouts turned nyctophobic beyond Substation 9.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 252,
+    word: "Mnemonic",
+    type: "adj/noun",
+    definition: "Related to memory or aiding recollection",
+    example: "He carved mnemonic sigils into the wall—so he’d remember who he was.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 253,
+    word: "Tessellated",
+    type: "adj",
+    definition: "Patterned with interlocking shapes",
+    example: "The floor was tessellated with bone tiles, too precise to be random.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 254,
+    word: "Strobic",
+    type: "adj",
+    definition: "Flashing rhythmically (like strobe lights)",
+    example: "The strobic flicker of failing lamps made everything feel unreal.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 255,
+    word: "Desanguinate",
+    type: "verb",
+    definition: "To bleed completely",
+    example: "The soldier desanguinated in seconds, his blood pooling like ink.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 256,
+    word: "Omphalos",
+    type: "noun",
+    definition: "The center or navel of the world",
+    example: "This was the omphalos—where it all began, and would all end.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 257,
+    word: "Parasitic",
+    type: "adj",
+    definition: "Living off a host; draining and invasive",
+    example: "The thing was parasitic, speaking through their own voices.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 258,
+    word: "Ablative",
+    type: "adj",
+    definition: "Designed to be worn away for protection",
+    example: "The outer walls were ablative, already peeling under acid exposure.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 259,
+    word: "Chasmic",
+    type: "adj",
+    definition: "Vast, gaping, resembling a bottomless pit",
+    example: "The chasmic silence below made even thoughts echo.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 260,
+    word: "Cryptogenic",
+    type: "adj",
+    definition: "Of unknown or obscure origin",
+    example: "The disease was cryptogenic—no source, no patient zero.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 261,
+    word: "Hemalurgy",
+    type: "noun",
+    definition: "Sacrificial magic using blood (archaic)",
+    example: "The runes glowed with hemalurgy, fed by ancient rites.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 262,
+    word: "Oblation",
+    type: "noun",
+    definition: "A ritual offering, often sacrificial",
+    example: "He was chosen as an oblation—one life to awaken the station.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 263,
+    word: "Effaced",
+    type: "adj/verb",
+    definition: "Erased, worn away",
+    example: "The names on the wall had been effaced—intentionally forgotten.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 264,
+    word: "Recrudescence",
+    type: "noun",
+    definition: "The return of something after a period of dormancy",
+    example: "The infection’s recrudescence hit like wildfire—silent and sudden.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 265,
+    word: "Intercalate",
+    type: "verb",
+    definition: "To insert between elements or layers",
+    example: "They had intercalated the serum into his neural thread.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 266,
+    word: "Zoophagus",
+    type: "adj",
+    definition: "Feeding on animals or flesh",
+    example: "The zoophagus spores sprouted from the corpses within hours.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 267,
+    word: "Xenomorphous",
+    type: "adj",
+    definition: "Having an unnatural or alien shape",
+    example: "The statue was xenomorphous—curved like thought, not bone.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 268,
+    word: "Entropic",
+    type: "adj",
+    definition: "Relating to entropy, decay, disorder",
+    example: "Every breath was entropic—eroding their structure one step at a time.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 269,
+    word: "Nihilotic",
+    type: "adj",
+    definition: "Born of or resembling nothingness",
+    example: "The room was nihilotic—no time, no light, no memory.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 270,
+    word: "Ligature",
+    type: "noun",
+    definition: "A binding or tie, especially for restriction",
+    example: "The corpses were bound in metal ligatures—surgical and reverent.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 271,
+    word: "Caducity",
+    type: "noun",
+    definition: "Frailty; the inevitable decay of the body",
+    example: "Caducity had taken his limbs—but not his hatred.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 272,
+    word: "Funest",
+    type: "adj",
+    definition: "Deadly; mournful",
+    example: "It was a funest wind that carried the ash into the vault.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 273,
+    word: "Geloscopy",
+    type: "noun",
+    definition: "Divination by laughter",
+    example: "The AI ran geloscopy tests on the prisoners—laughter as truth.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 274,
+    word: "Malefic",
+    type: "adj",
+    definition: "Evil in effect or intent",
+    example: "The signal was malefic—it burned out eardrums and woke the deep.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 275,
+    word: "Caul",
+    type: "noun",
+    definition: "A membrane enclosing a fetus; symbolic of protection or doom",
+    example: "He was born with a caul—marked as a seer before breath.",
+    category: "Collapse, Memory, Ritual & Void"
+  },
+  {
+    id: 276,
+    word: "Livid",
+    type: "adj",
+    definition: "Bruised, darkened; also furious",
+    example: "A livid bruise spread across his ribs, blooming like rot.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 277,
+    word: "Turbid",
+    type: "adj",
+    definition: "Cloudy, opaque, thick with disturbance",
+    example: "The turbid water sloshed with unseen movement beneath the surface.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 278,
+    word: "Gnarled",
+    type: "adj",
+    definition: "Twisted, weathered, rough",
+    example: "The gnarled piping overhead dripped rust like blood.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 279,
+    word: "Oozing",
+    type: "adj/verb",
+    definition: "Seeping slowly; suggestive of pus or decay",
+    example: "The wound was oozing—thick, yellow, and foul.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 280,
+    word: "Craggy",
+    type: "adj",
+    definition: "Rough, jagged, uneven (especially terrain or faces)",
+    example: "They scaled the craggy ruin where the old relay tower had fallen.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 281,
+    word: "Hollow",
+    type: "adj",
+    definition: "Empty, echoing; devoid of life or substance",
+    example: "Her voice was hollow, scraped clean of emotion.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 282,
+    word: "Wheezing",
+    type: "adj/verb",
+    definition: "Breathing with difficulty or strain",
+    example: "The machine gave a wheezing cough as it sputtered to life.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 283,
+    word: "Pocked",
+    type: "adj",
+    definition: "Marked with holes, scars, or indentations",
+    example: "The walls were pocked with bullet holes and bite marks.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 284,
+    word: "Sluggish",
+    type: "adj",
+    definition: "Slow, heavy, resistant",
+    example: "The atmosphere was thick and sluggish, dragging against every breath.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 285,
+    word: "Ragged",
+    type: "adj",
+    definition: "Tattered, uneven, or torn",
+    example: "Ragged banners of synthetic cloth clung to the ruined corridor.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 286,
+    word: "Clammy",
+    type: "adj",
+    definition: "Damp, sticky, unpleasant to the touch",
+    example: "His skin was clammy, cold despite the heat.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 287,
+    word: "Seething",
+    type: "adj/verb",
+    definition: "Boiling over; intensely angry or active",
+    example: "The vents were seething with steam and spore clouds.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 288,
+    word: "Ashen",
+    type: "adj",
+    definition: "Pale, gray, corpse-like",
+    example: "An ashen haze clung to the chamber like funereal breath.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 289,
+    word: "Rutted",
+    type: "adj",
+    definition: "Grooved or worn down by repeated passage",
+    example: "The floor was rutted by decades of tracked machines and boots.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 290,
+    word: "Jarring",
+    type: "adj",
+    definition: "Unexpected and disturbing; clashing",
+    example: "A jarring noise split the silence, metallic and too close.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 291,
+    word: "Splintered",
+    type: "adj/verb",
+    definition: "Broken into sharp fragments",
+    example: "The console was splintered, shards of glass embedded in the screen.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 292,
+    word: "Snarled",
+    type: "adj/verb",
+    definition: "Tangled, knotted, or growled",
+    example: "Cables lay snarled across the floor like dead serpents.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 293,
+    word: "Slack",
+    type: "adj",
+    definition: "Loose, drooping, lacking energy",
+    example: "His grip went slack, the rifle clattering to the floor.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 294,
+    word: "Flickering",
+    type: "adj/verb",
+    definition: "Unsteady or wavering light",
+    example: "The flickering bulbs made shadows dance like phantoms.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 295,
+    word: "Splattered",
+    type: "adj/verb",
+    definition: "Smeared or thrown violently",
+    example: "Green ichor splattered the walls with every shot.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 296,
+    word: "Rancid",
+    type: "adj",
+    definition: "Rotting, putrid, offensively foul",
+    example: "A rancid stench rose from the sinkhole beneath their feet.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 297,
+    word: "Riveted",
+    type: "adj/verb",
+    definition: "Fixed in place (physically or with attention)",
+    example: "Her gaze was riveted to the writhing form in the corner.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 298,
+    word: "Haggard",
+    type: "adj",
+    definition: "Worn, drawn, exhausted",
+    example: "Baren looked haggard—his eyes sunken, his breath shallow.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 299,
+    word: "Tattered",
+    type: "adj",
+    definition: "Torn, frayed, falling apart",
+    example: "He wore a tattered coat stitched with wire and memory.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 300,
+    word: "Grimy",
+    type: "adj",
+    definition: "Covered in dirt, soot, or filth",
+    example: "The grimy keypad glowed faintly, sticky with old blood.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 301,
+    word: "Creaking",
+    type: "adj/verb",
+    definition: "Emitting a long, harsh sound under strain",
+    example: "The stairwell was creaking beneath their boots like old bones.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 302,
+    word: "Scabbed",
+    type: "adj",
+    definition: "Covered with crusty, healing wounds or hardened patches",
+    example: "The control panel was scabbed with rust and dried blood.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 303,
+    word: "Smoldering",
+    type: "adj/verb",
+    definition: "Burning slowly with smoke but no flame",
+    example: "Smoldering ruins coughed ash into the broken sky.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 304,
+    word: "Warped",
+    type: "adj",
+    definition: "Twisted out of shape, often by heat or pressure",
+    example: "The warped doorway groaned, barely clinging to its hinges.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 305,
+    word: "Dilapidated",
+    type: "adj",
+    definition: "Falling apart; decayed from neglect or age",
+    example: "They took shelter in a dilapidated substation, its walls crumbling with mold.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 306,
+    word: "Peeling",
+    type: "adj/verb",
+    definition: "Coming off in layers or flakes",
+    example: "Paint was peeling from the reactor doors in sheets like dead skin.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 307,
+    word: "Chipped",
+    type: "adj",
+    definition: "Broken at the edges; damaged but intact",
+    example: "Her chipped visor barely held together as the fumes thickened.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 308,
+    word: "Crusted",
+    type: "adj",
+    definition: "Encrusted or hardened with filth, residue, or age",
+    example: "The floor was crusted with dried ichor and shattered glass.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 309,
+    word: "Rusted",
+    type: "adj",
+    definition: "Corroded by time and oxidation",
+    example: "The rusted ladder shuddered under Baren’s weight.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 310,
+    word: "Snapping",
+    type: "adj/verb",
+    definition: "Making quick, sharp breaking or biting sounds",
+    example: "Snapping wires flailed from the ceiling like metal vipers.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 311,
+    word: "Quivering",
+    type: "adj/verb",
+    definition: "Trembling, often from fear or cold",
+    example: "His hands were quivering as the door hissed open.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 312,
+    word: "Frail",
+    type: "adj",
+    definition: "Delicate, brittle, or easily broken",
+    example: "The structure was frail, held together by habit more than design.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 313,
+    word: "Rumbling",
+    type: "adj/verb",
+    definition: "Deep, continuous sound from movement or force",
+    example: "A low rumbling echoed beneath the tracks—something massive was stirring.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 314,
+    word: "Glistening",
+    type: "adj/verb",
+    definition: "Shiny and wet-looking, often unpleasantly",
+    example: "The floor was glistening with fluid that refused to dry.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 315,
+    word: "Scorched",
+    type: "adj",
+    definition: "Burned on the surface",
+    example: "Scorched armor littered the hallway, melted into the floor.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 316,
+    word: "Twisted",
+    type: "adj",
+    definition: "Distorted, grotesque, unnaturally contorted",
+    example: "The bodies were twisted—fused with the wall like cursed sculpture.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 317,
+    word: "Splitting",
+    type: "adj",
+    definition: "Violent or painful dividing; also refers to sharp noise or ache",
+    example: "A splitting noise cracked the silence, like bone under pressure.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 318,
+    word: "Ragged-edged",
+    type: "adj",
+    definition: "Jagged, uneven, frayed",
+    example: "He slid the ragged-edged blade back into his belt.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 319,
+    word: "Soaked",
+    type: "adj",
+    definition: "Saturated; heavy with liquid",
+    example: "His coat was soaked in chemical runoff from the overhead leak.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 320,
+    word: "Sagging",
+    type: "adj",
+    definition: "Drooping under pressure, weight, or decay",
+    example: "The sagging ceiling was ready to collapse at the slightest vibration.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 321,
+    word: "Brittle",
+    type: "adj",
+    definition: "Fragile, liable to snap or shatter",
+    example: "Her brittle resolve cracked when she saw what remained of the crew.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 322,
+    word: "Matted",
+    type: "adj",
+    definition: "Tangled and pressed together; sticky or unclean",
+    example: "His hair was matted with grime and blood.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 323,
+    word: "Wretched",
+    type: "adj",
+    definition: "Miserable, vile, pitiful",
+    example: "They emerged into a wretched corridor that stank of failure.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 324,
+    word: "Cramped",
+    type: "adj",
+    definition: "Uncomfortably small or confined",
+    example: "They moved through the cramped shaft, barely able to breathe.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 325,
+    word: "Lurching",
+    type: "adj/verb",
+    definition: "Moving with sudden, uncontrolled motion",
+    example: "The train screeched forward, lurching like something dying.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 326,
+    word: "Reeking",
+    type: "adj/verb",
+    definition: "Strongly emitting a foul odor",
+    example: "The chamber was reeking of burnt oil and rotting flesh.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 327,
+    word: "Parched",
+    type: "adj",
+    definition: "Dried out from heat or dehydration",
+    example: "The ground was parched, cracked like old parchment.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 328,
+    word: "Slick",
+    type: "adj",
+    definition: "Smooth and slippery, often with liquid or slime",
+    example: "A slick trail of mucus marked the creature’s path.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 329,
+    word: "Throbbing",
+    type: "adj/verb",
+    definition: "Pulsing rhythmically, often with pain or energy",
+    example: "The wound was throbbing with heat, infected and alive.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 330,
+    word: "Dank",
+    type: "adj",
+    definition: "Unpleasantly moist and cold",
+    example: "They descended into a dank tunnel lined with mildew and bone.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 331,
+    word: "Bristling",
+    type: "adj/verb",
+    definition: "Covered or rising with short, stiff hairs or spikes; tense with emotion",
+    example: "Her arms were bristling with static and sweat.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 332,
+    word: "Thickening",
+    type: "adj/verb",
+    definition: "Becoming more dense or obscured",
+    example: "The fog was thickening—heavy, wet, and laced with spores.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 333,
+    word: "Clotted",
+    type: "adj",
+    definition: "Congealed into lumps or thick masses",
+    example: "Clotted blood marked the stairway in drying trails.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 334,
+    word: "Grating",
+    type: "adj/verb",
+    definition: "Harsh or grinding in sound or texture",
+    example: "The grating of rusted gears echoed in their skulls.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 335,
+    word: "Dripping",
+    type: "adj/verb",
+    definition: "Falling or oozing in drops",
+    example: "Dripping wires sparked over the flooded floor.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 336,
+    word: "Fetid",
+    type: "adj",
+    definition: "Extremely foul-smelling",
+    example: "A fetid breath escaped the vent, warm and wet.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 337,
+    word: "Pulverized",
+    type: "adj/verb",
+    definition: "Crushed to fine particles or dust",
+    example: "Pulverized bone dust coated the tiles like snow.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 338,
+    word: "Slumping",
+    type: "adj/verb",
+    definition: "Collapsing or drooping downward heavily",
+    example: "The slumping structure gave out with a whisper and a boom.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 339,
+    word: "Charcoal-black",
+    type: "adj",
+    definition: "Deep, ashy black; burned or scorched",
+    example: "Charcoal-black handprints lined the wall—like someone trying to escape.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 340,
+    word: "Bloodied",
+    type: "adj",
+    definition: "Stained with or covered in blood",
+    example: "He limped back, bloodied and gasping, dragging something behind him.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 341,
+    word: "Shuddering",
+    type: "adj/verb",
+    definition: "Trembling with force, fear, or reaction",
+    example: "The reactor core was shuddering—like something trapped inside it.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 342,
+    word: "Crumbling",
+    type: "adj/verb",
+    definition: "Falling apart into fragments",
+    example: "The crumbling stairwell sagged under its own history.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 343,
+    word: "Searing",
+    type: "adj/verb",
+    definition: "Intensely hot or painfully sharp",
+    example: "A searing pain shot through his spine as he connected the cables.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 344,
+    word: "Molten",
+    type: "adj",
+    definition: "Liquefied by heat; glowing with heat",
+    example: "Molten metal bled from the hull’s fractures like lava.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 345,
+    word: "Eroded",
+    type: "adj/verb",
+    definition: "Worn down over time by force or decay",
+    example: "The eroded signs were unreadable, devoured by rust and rain.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 346,
+    word: "Howling",
+    type: "adj/verb",
+    definition: "Producing a loud, mournful, or wild sound",
+    example: "A howling draft swept through the corridor like a warning.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 347,
+    word: "Tingling",
+    type: "adj/verb",
+    definition: "Producing a slight stinging or prickling sensation",
+    example: "His fingers were tingling—the radiation was stronger here.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 348,
+    word: "Pulsing",
+    type: "adj/verb",
+    definition: "Expanding and contracting rhythmically",
+    example: "A pulsing light beat like a heartbeat inside the flesh-wall.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 349,
+    word: "Grizzled",
+    type: "adj",
+    definition: "Streaked with gray; weathered and worn",
+    example: "The grizzled veteran never flinched, even as the sky fell.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 350,
+    word: "Bubbling",
+    type: "adj/verb",
+    definition: "Forming or emitting gas or energy in bursts",
+    example: "The ooze was bubbling—alive, angry, and aware.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 351,
+    word: "Splintering",
+    type: "adj/verb",
+    definition: "Breaking into sharp, dangerous fragments",
+    example: "The splintering concrete rained down like shrapnel from the ceiling.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 352,
+    word: "Whimpering",
+    type: "adj/verb",
+    definition: "Making soft, fearful cries or sounds",
+    example: "Whimpering echoes leaked from the sealed containment room.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 353,
+    word: "Pungent",
+    type: "adj",
+    definition: "Strong-smelling, often sharp or unpleasant",
+    example: "A pungent chemical stink filled the corridor, sharp enough to sting the eyes.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 354,
+    word: "Groaning",
+    type: "adj/verb",
+    definition: "Making a deep, mournful, strained sound",
+    example: "The groaning structure above them sounded close to collapse.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 355,
+    word: "Bubonic",
+    type: "adj",
+    definition: "Relating to disease and plague; swollen, infected",
+    example: "His shoulder bulged with a bubonic mass, pulsing with corruption.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 356,
+    word: "Spindly",
+    type: "adj",
+    definition: "Long, thin, and weak-looking",
+    example: "Spindly limbs dragged beneath the metal door, boneless and twitching.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 357,
+    word: "Churning",
+    type: "adj/verb",
+    definition: "Violently stirring or agitating",
+    example: "A churning noise from below signaled the reactor’s death spiral.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 358,
+    word: "Rattling",
+    type: "adj/verb",
+    definition: "Producing rapid, shaking sounds",
+    example: "The rattling pipe behind him hadn’t stopped since the screaming began.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 359,
+    word: "Gnashing",
+    type: "adj/verb",
+    definition: "Grinding or clashing teeth or metal",
+    example: "Gnashing jaws emerged from the dark, searching for warmth.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 360,
+    word: "Skittering",
+    type: "adj/verb",
+    definition: "Moving quickly with small, light sounds or movements",
+    example: "Skittering forms darted across the grate—too fast to name, too close to forget.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 361,
+    word: "Viscous",
+    type: "adj",
+    definition: "Thick, sticky, and slow-flowing",
+    example: "Viscous black sludge coated the floor, swallowing boots with every step.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 362,
+    word: "Limping",
+    type: "adj/verb",
+    definition: "Walking unevenly from weakness or injury",
+    example: "He came limping through the smoke, rifle dragging like an anchor.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 363,
+    word: "Gasping",
+    type: "adj/verb",
+    definition: "Breathing in short, desperate bursts",
+    example: "The patient was gasping—choking on blood and light.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 364,
+    word: "Sickly",
+    type: "adj",
+    definition: "Unhealthy-looking, pale, or nauseating",
+    example: "A sickly glow pulsed from the cracked wall panel.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 365,
+    word: "Coarse",
+    type: "adj",
+    definition: "Rough in texture or manner",
+    example: "Coarse blankets covered the cots, soaked with fear-sweat.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 366,
+    word: "Wailing",
+    type: "adj/verb",
+    definition: "Crying or moaning loudly and painfully",
+    example: "The wailing behind the door was neither human nor machine.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 367,
+    word: "Shattered",
+    type: "adj",
+    definition: "Broken into fragments; destroyed",
+    example: "Shattered glass coated the floor like jagged frost.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 368,
+    word: "Crusted-over",
+    type: "adj",
+    definition: "Hardened with dried matter like blood or grime",
+    example: "His boots were crusted-over with ash and marrow.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 369,
+    word: "Buckled",
+    type: "adj/verb",
+    definition: "Bent or collapsed under pressure",
+    example: "The hallway buckled inward like ribs crushed from the inside.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 370,
+    word: "Fractured",
+    type: "adj",
+    definition: "Broken or split into parts",
+    example: "The fractured map still flickered, confused by the new layout.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 371,
+    word: "Sweltering",
+    type: "adj",
+    definition: "Oppressively hot and humid",
+    example: "They crawled through the sweltering vent, breath thick and slow.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 372,
+    word: "Beaded",
+    type: "adj",
+    definition: "Dotted with drops of liquid",
+    example: "His brow was beaded with sweat as the countdown began.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 373,
+    word: "Gnarled-over",
+    type: "adj",
+    definition: "Knotted and twisted from age or trauma",
+    example: "The hatch was gnarled-over with coralized growths.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 374,
+    word: "Tinged",
+    type: "adj/verb",
+    definition: "Slightly colored or flavored with something",
+    example: "Her voice was tinged with static and sorrow.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 375,
+    word: "Drained",
+    type: "adj/verb",
+    definition: "Completely emptied of energy or substance",
+    example: "The city was drained—of life, of power, of meaning.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 376,
+    word: "Threadbare",
+    type: "adj",
+    definition: "Worn out to the point of being see-through or falling apart",
+    example: "He wrapped himself in a threadbare cloak that stank of smoke and time.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 377,
+    word: "Spattered",
+    type: "adj/verb",
+    definition: "Marked or covered with splashes of liquid or matter",
+    example: "The ceiling was spattered with blood, arcing from an unseen struggle.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 378,
+    word: "Thudding",
+    type: "adj/verb",
+    definition: "Producing dull, heavy beats or impacts",
+    example: "Thudding footsteps moved overhead — slow, deliberate, hunting.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 379,
+    word: "Sagged",
+    type: "adj/verb",
+    definition: "Dropped or drooped downward under strain",
+    example: "The support beam sagged, veined with cracks like brittle bone.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 380,
+    word: "Cindered",
+    type: "adj",
+    definition: "Burned to ash or char; resembling embers",
+    example: "The door was cindered shut, fused into a solid scar.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 381,
+    word: "Warping",
+    type: "adj/verb",
+    definition: "Bending or twisting unnaturally",
+    example: "The warping metal made a sound like screaming in reverse.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 382,
+    word: "Twitching",
+    type: "adj/verb",
+    definition: "Making small, involuntary jerks or movements",
+    example: "The twitching limb still gripped the detonator.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 383,
+    word: "Sputtering",
+    type: "adj/verb",
+    definition: "Failing to function smoothly; emitting bursts of sound or flame",
+    example: "The turret was sputtering sparks, dying with every click.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 384,
+    word: "Heaving",
+    type: "adj/verb",
+    definition: "Rising and falling with effort, often from breath or strain",
+    example: "The mutant’s chest was heaving, leaking steam with each gasp.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 385,
+    word: "Gurgling",
+    type: "adj/verb",
+    definition: "Making a hollow, bubbling noise (from fluid or throat)",
+    example: "A gurgling moan escaped the air duct, wet and wrong.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 386,
+    word: "Crinkled",
+    type: "adj/verb",
+    definition: "Wrinkled or crumpled in texture",
+    example: "His crinkled skin was tight as dried parchment.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 387,
+    word: "Ragged-breathing",
+    type: "adj",
+    definition: "Uneven, gasping respiration",
+    example: "Ragged-breathing filled the bunker like a tide of panic.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 388,
+    word: "Crooked",
+    type: "adj",
+    definition: "Bent, twisted, or misaligned",
+    example: "A crooked doorframe sagged over the survivor like a grin.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 389,
+    word: "Corroded",
+    type: "adj",
+    definition: "Eaten away by rust or decay",
+    example: "The corroded hatch screamed open, exposing the rot inside.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 390,
+    word: "Hushed",
+    type: "adj",
+    definition: "Muted, quiet, or suppressed",
+    example: "A hushed tension filled the tunnel, louder than gunfire.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 391,
+    word: "Tattered-hemmed",
+    type: "adj",
+    definition: "Having frayed, ruined edges (usually of cloth)",
+    example: "The tattered-hemmed cloak dragged behind him like a flag of ruin.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 392,
+    word: "Smudged",
+    type: "adj",
+    definition: "Blurred or stained by contact",
+    example: "Smudged fingerprints covered the console — all pointing inward.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 393,
+    word: "Raking",
+    type: "adj/verb",
+    definition: "Scraping violently across a surface",
+    example: "Claws were raking the hatch from the other side.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 394,
+    word: "Slack-jawed",
+    type: "adj",
+    definition: "Mouth hanging open in shock, stupidity, or death",
+    example: "The corpse sat slack-jawed, staring into nothing.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 395,
+    word: "Winded",
+    type: "adj",
+    definition: "Out of breath; physically overwhelmed",
+    example: "She was winded, bleeding, but still holding the detonator.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 396,
+    word: "Knotted",
+    type: "adj",
+    definition: "Twisted tightly into lumps or tension",
+    example: "Knotted cables clung to the ceiling like alien vines.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 397,
+    word: "Seeped",
+    type: "adj/verb",
+    definition: "Slowly escaped or oozed out",
+    example: "Dark liquid seeped through the cracks in the reactor casing.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 398,
+    word: "Croaking",
+    type: "adj/verb",
+    definition: "Speaking in a low, hoarse voice",
+    example: "He managed a single croaking word before he collapsed: 'Run.'",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 399,
+    word: "Grimy-palmed",
+    type: "adj",
+    definition: "Having dirty, stained hands",
+    example: "The grimy-palmed technician keyed in the override with trembling fingers.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 400,
+    word: "Bleeding-edge",
+    type: "adj",
+    definition: "Extremely advanced, experimental, and dangerous (often tech)",
+    example: "The bleeding-edge interface pulsed with illegal AI protocols.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 401,
+    word: "Slackening",
+    type: "adj/verb",
+    definition: "Becoming looser, slower, or weaker",
+    example: "The grip on his rifle was slackening—nerves unraveling one breath at a time.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 402,
+    word: "Twinkling",
+    type: "adj",
+    definition: "Flickering or sparkling intermittently",
+    example: "A twinkling trail of dust floated where the breach opened.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 403,
+    word: "Drenched",
+    type: "adj",
+    definition: "Soaked through with liquid",
+    example: "He was drenched in coolant and blood, shivering in silence.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 404,
+    word: "Draped",
+    type: "adj/verb",
+    definition: "Covered loosely in folds or fabric",
+    example: "A body was draped in a tarp, twitching slightly beneath.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 405,
+    word: "Smoldered",
+    type: "adj/verb",
+    definition: "Burned without flame, usually with smoke",
+    example: "The tunnel smoldered long after the charge had gone off.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 406,
+    word: "Flecked",
+    type: "adj/verb",
+    definition: "Spotted or speckled with small particles",
+    example: "The control panel was flecked with ash and old blood.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 407,
+    word: "Furrowed",
+    type: "adj/verb",
+    definition: "Grooved or lined, especially from tension or age",
+    example: "Her brow furrowed as the static turned to voices.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 408,
+    word: "Whetted",
+    type: "adj/verb",
+    definition: "Sharpened or stimulated (literally or figuratively)",
+    example: "His blade was whetted, his hunger sharpened by fear.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 409,
+    word: "Encrusted",
+    type: "adj/verb",
+    definition: "Covered with a hard, crusty layer",
+    example: "The reactor door was encrusted with frost and grime.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 410,
+    word: "Jutting",
+    type: "adj/verb",
+    definition: "Sticking out sharply or abruptly",
+    example: "Jutting rebar tore through the floor like skeletal fingers.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 411,
+    word: "Dull-eyed",
+    type: "adj",
+    definition: "Lacking light or awareness in expression",
+    example: "The dull-eyed children stared as if watching memories bleed out.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 412,
+    word: "Warped-metal",
+    type: "adj",
+    definition: "Bent and misshapen metallic structure",
+    example: "The warped-metal arch hissed as they passed beneath it.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 413,
+    word: "Glowering",
+    type: "adj/verb",
+    definition: "Staring with anger or menace",
+    example: "A glowering sentry drone hovered near the shadows.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 414,
+    word: "Pocked",
+    type: "adj",
+    definition: "Covered in small holes, dents, or scars",
+    example: "The walls were pocked with bullet holes and decay.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 415,
+    word: "Fissured",
+    type: "adj",
+    definition: "Cracked or split by deep lines",
+    example: "The ground was fissured by decades of heat and weight.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 416,
+    word: "Blank-faced",
+    type: "adj",
+    definition: "Emotionless, unreadable in expression",
+    example: "The blank-faced soldier raised her weapon without hesitation.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 417,
+    word: "Tremoring",
+    type: "adj/verb",
+    definition: "Shaking or quaking subtly, often from fear or tension",
+    example: "The ground was tremoring—something vast stirred beneath.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 418,
+    word: "Crusted-over",
+    type: "adj",
+    definition: "Hardened and sealed by buildup or drying",
+    example: "The mask was crusted-over with vomit and dried plasma.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 419,
+    word: "Shambling",
+    type: "adj/verb",
+    definition: "Moving with a slow, awkward, dragging gait",
+    example: "A shambling figure emerged from the smoke, breathing wrong.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
+  {
+    id: 420,
+    word: "Bleached",
+    type: "adj/verb",
+    definition: "Whitened or stripped of color by exposure",
+    example: "Bleached skulls lined the trench like votive offerings.",
+    category: "Descriptive, Atmospheric, and Sensory"
+  },
 ]
