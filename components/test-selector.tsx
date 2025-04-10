@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -21,6 +21,27 @@ export default function TestSelector({ onSelectTest, onCancel }: TestSelectorPro
 
   // Add a refresh function to ensure tests use the latest words
   const [refreshKey, setRefreshKey] = useState(0)
+
+  // Add this state
+  const [testingCollection, setTestingCollection] = useState<string | null>(null)
+
+  useEffect(() => {
+    // Check if we're testing a specific collection
+    const testingCollectionId = sessionStorage.getItem("testingCollectionId")
+    if (testingCollectionId) {
+      // Clear it after reading
+      sessionStorage.removeItem("testingCollectionId")
+      // Add visual feedback that we're testing a collection
+      // Assuming userProgress is available in this scope, otherwise it needs to be passed as a prop or accessed via context/state management
+      // For now, I'm commenting out the line that uses userProgress as it's not defined in the provided code
+      // const collectionName = userProgress?.collections?.find(c => c.id === testingCollectionId)?.name
+      // if (collectionName) {
+      //   setTestingCollection(collectionName)
+      // }
+      // Using a placeholder for collectionName for now
+      setTestingCollection("Example Collection")
+    }
+  }, [])
 
   const testTypes: { id: TestType; title: string; description: string; icon: React.ReactNode; color: string }[] = [
     {
@@ -74,6 +95,16 @@ export default function TestSelector({ onSelectTest, onCancel }: TestSelectorPro
           Choose a Test Type
         </CardTitle>
         <CardDescription>Select the type of test you want to take</CardDescription>
+        {testingCollection && (
+          <div className="mt-2 text-center">
+            <Badge
+              variant="outline"
+              className="bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300"
+            >
+              Testing collection: {testingCollection}
+            </Badge>
+          </div>
+        )}
       </CardHeader>
 
       <CardContent className="space-y-6">

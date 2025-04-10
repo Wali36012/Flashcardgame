@@ -1212,19 +1212,19 @@ export const wordData = [
   },
   {
     id: 151,
-    word: "Gambit",
+    word: "Propulsion",
     type: "noun",
-    definition: "A calculated move or strategy, often risky",
-    example: "Baren's charge was a desperate gambit to buy them time.",
-    category: "Action, Conflict & Kinetics",
+    definition: "The action of driving or pushing forward",
+    example: "The new propulsion system allowed for near-light-speed travel.",
+    category: "Technology & Innovation",
   },
   {
     id: 152,
-    word: "Voracious",
+    word: "Augmented",
     type: "adj",
-    definition: "Extremely hungry or greedy; eager",
-    example: "The creature's voracious snarl reverberated through the corridor.",
-    category: "Action, Conflict & Kinetics",
+    definition: "Having been made greater in size or value",
+    example: "Her augmented vision allowed her to see across the electromagnetic spectrum.",
+    category: "Technology & Innovation",
   },
   {
     id: 153,
@@ -1369,5 +1369,405 @@ export const wordData = [
     definition: "A stronghold or defensive fort",
     example: "They fell back to the redoubt, the last stand of Vostok.",
     category: "Action, Conflict & Kinetics",
+  },
+  {
+    id: 171,
+    word: "Trophic",
+    type: "adj",
+    definition: "Related to feeding, especially at a biological level",
+    example: "The growth’s trophic structure fed off rot, memory, and light.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 172,
+    word: "Zoetic",
+    type: "adj",
+    definition: "Pertaining to life; vital",
+    example: "Despite its rot, something zoetic stirred within the corpse.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 173,
+    word: "Ophiolatrous",
+    type: "adj",
+    definition: "Worshipping serpents",
+    example: "The sigils were ophiolatrous—ancient, heretical, and carved in bone.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 174,
+    word: "Hypogeal",
+    type: "adj",
+    definition: "Existing underground or beneath the surface",
+    example: "The hypogeal system sprawled beneath the metro—older than maps, and alive.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 175,
+    word: "Hemal",
+    type: "adj",
+    definition: "Relating to blood",
+    example: "The chamber’s hum wasn’t electric—it was hemal, pulsing with synthetic circulation.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 176,
+    word: "Exuviae",
+    type: "noun",
+    definition: "Cast-off skin or shell (especially from insects/snakes)",
+    example: "Exuviae clung to the pipe like husks of failed metamorphosis.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 177,
+    word: "Serrated",
+    type: "adj",
+    definition: "Notched or jagged like a saw",
+    example: "The creature's serrated limbs dragged sparks from the floor.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 178,
+    word: "Yawning",
+    type: "adj",
+    definition: "Gaping open wide; vast and empty",
+    example: "A yawning chasm split the chamber where the reactor once stood.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 179,
+    word: "Lachrymal",
+    type: "adj",
+    definition: "Related to tears or weeping",
+    example: "The lachrymal ducts leaked black fluid—a grotesque imitation of sorrow.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 180,
+    word: "Vitiate",
+    type: "verb",
+    definition: "To corrupt or spoil the integrity of something",
+    example: "The code had been vitiated—rewritten with something nonhuman.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 181,
+    word: "Miasma",
+    type: "noun",
+    definition: "A thick, oppressive atmosphere, often foul or toxic",
+    example: "A miasma of decay coiled through the hallway like a sentient fog.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 182,
+    word: "Chitinous",
+    type: "adj",
+    definition: "Hard, shell-like (insectoid texture)",
+    example: "Its chitinous armor crackled as it shifted in the dark.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 183,
+    word: "Stridulate",
+    type: "verb",
+    definition: "To make a high-pitched noise by rubbing body parts (insects)",
+    example: "Something stridulated deep within the vent, clicking faster with each step.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 184,
+    word: "Senescence",
+    type: "noun",
+    definition: "The process of growing old or decaying",
+    example: "The station had fallen into senescence—its systems sluggish, its soul spent.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 185,
+    word: "Amorphous",
+    type: "adj",
+    definition: "Lacking clear shape or form",
+    example: "An amorphous bulk writhed across the tunnel, pulsing with wet life.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 186,
+    word: "Imbricated",
+    type: "adj",
+    definition: "Overlapping like scales or tiles",
+    example: "The wall was imbricated with bone and wire, like synthetic armor.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 187,
+    word: "Cryptid",
+    type: "noun",
+    definition: "A creature whose existence is unverified by science",
+    example: "Locals spoke of a cryptid that dragged soldiers into the abyss.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 188,
+    word: "Lacuna",
+    type: "noun",
+    definition: "A gap or missing part",
+    example: "There was a lacuna in the memory logs—twenty minutes lost to static.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 189,
+    word: "Putrefaction",
+    type: "noun",
+    definition: "The process of decay or rotting in a body",
+    example: "Putrefaction hung in the air like a silent scream.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 190,
+    word: "Rictus",
+    type: "noun",
+    definition: "A frozen, often grotesque grin or grimace",
+    example: "The corpse wore a rictus grin, its jaw unhinged in final horror.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 191,
+    word: "Necrotic",
+    type: "adj",
+    definition: "Relating to the death of tissue",
+    example: "The infection spread in necrotic streaks, devouring his arm from within.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 192,
+    word: "Cyclopean",
+    type: "adj",
+    definition: "Massive, ancient, and primitive",
+    example: "Cyclopean slabs formed the foundation—architecture not meant for human eyes.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 193,
+    word: "Cacotopia",
+    type: "noun",
+    definition: "A nightmare world; the opposite of a utopia",
+    example: "The world above had become a cacotopia—lightless, lawless, lost.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 194,
+    word: "Emanation",
+    type: "noun",
+    definition: "Something that flows or radiates from a source",
+    example: "A cold emanation poured from the reactor, whispering ancient names.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 195,
+    word: "Chiaroscuro",
+    type: "noun",
+    definition: "The contrast between light and dark",
+    example: "The hallway was a chiaroscuro of flickering flame and swallowing shadow.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 196,
+    word: "Quagmire",
+    type: "noun",
+    definition: "A messy, entrapping situation (or literal bog)",
+    example: "They were knee-deep in a tactical quagmire with no clear way out.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 197,
+    word: "Autochthonous",
+    type: "adj",
+    definition: "Indigenous, native to a specific place",
+    example: "Some claim the Ravagers were autochthonous—born from the soil itself.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 198,
+    word: "Ossuary",
+    type: "noun",
+    definition: "A container or place for bones",
+    example: "The chamber was an ossuary disguised as a med-bay.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 199,
+    word: "Gelid",
+    type: "adj",
+    definition: "Icy cold; deathly chill",
+    example: "A gelid wind swept through the opening, carrying whispers not meant for ears.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 200,
+    word: "Charnel fog",
+    type: "phrase",
+    definition: "A sick, heavy mist associated with death",
+    example: "A charnel fog crept along the floor, thick with the stench of endings.",
+    category: "Collapse, Mutation, Madness & Ruin"
+  },
+  {
+    id: 201,
+    word: "Scoriated",
+    type: "adj",
+    definition: "Grooved, scarred, or flayed like scorched earth",
+    example: "The floor was scoriated with claw marks, melted slag, and blood trails.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 202,
+    word: "Aberrant",
+    type: "adj",
+    definition: "Deviating from the norm in a disturbing way",
+    example: "The child’s eyes were aberrant—too black, too knowing.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 203,
+    word: "Chimera",
+    type: "noun",
+    definition: "A monstrous hybrid; an illusion or unattainable dream",
+    example: "They had engineered a chimera—part man, part myth, all wrong.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 204,
+    word: "Cauterize",
+    type: "verb",
+    definition: "To burn shut (physically or metaphorically)",
+    example: "He cauterized the wound with a glowing pipe and a scream.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 205,
+    word: "Gelatinous",
+    type: "adj",
+    definition: "Thick, jelly-like; formless yet disgusting",
+    example: "A gelatinous growth pulsed on the ceiling, dripping with memory.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 206,
+    word: "Ectoplasmic",
+    type: "adj",
+    definition: "Related to ghostly or spiritual matter",
+    example: "The ectoplasmic mist clung to their skin, whispering through their pores.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 207,
+    word: "Anathemanic",
+    type: "adj",
+    definition: "Cursed, taboo, accursed by doctrine",
+    example: "The artifact was anathemanic—banned from every known doctrine of the old world.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 208,
+    word: "Transfix",
+    type: "verb",
+    definition: "To paralyze with awe, horror, or disbelief",
+    example: "Casimir stood transfixed, unable to blink as the beast unfolded.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 209,
+    word: "Mutilate",
+    type: "verb",
+    definition: "To disfigure or destroy body or form",
+    example: "The warning was nailed to the door—mutilated hands spelling out a message.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 210,
+    word: "Apoptotic",
+    type: "adj",
+    definition: "Relating to programmed cell death",
+    example: "The tissue was apoptotic—dying as though commanded by unseen code.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 211,
+    word: "Eugenic",
+    type: "adj",
+    definition: "Related to selective breeding or engineered purity",
+    example: "The Reds had adopted eugenic goals—purity through synthetic flesh.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 212,
+    word: "Chthonian",
+    type: "adj",
+    definition: "Dwelling beneath the earth; primal and ancient",
+    example: "They had disturbed something chthonian—older than gods, deeper than time.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 213,
+    word: "Scurf",
+    type: "noun",
+    definition: "Flakes or scales from skin or rust",
+    example: "The walls shed scurf like dandruff from a dying world.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 214,
+    word: "Cataphract",
+    type: "noun",
+    definition: "Heavily armored warrior or creature",
+    example: "The cataphract descended the corridor like a walking sarcophagus.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 215,
+    word: "Xenogenic",
+    type: "adj",
+    definition: "Originating from a foreign species",
+    example: "The spores were xenogenic—nothing from Earth bloomed that way.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 216,
+    word: "Nacreous",
+    type: "adj",
+    definition: "Iridescent, like mother-of-pearl; sickly beautiful",
+    example: "Nacreous veins pulsed through the creature’s translucent skin.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 217,
+    word: "Thanatomorphic",
+    type: "adj",
+    definition: "Shaped or transformed by death",
+    example: "It was no longer human—thanatomorphic and obscene in form.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 218,
+    word: "Keloid",
+    type: "noun",
+    definition: "Thick, raised scar tissue",
+    example: "Keloid welts crisscrossed his body like a map of old wounds.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 219,
+    word: "Paludal",
+    type: "adj",
+    definition: "Relating to swamps or marshes",
+    example: "Paludal muck oozed from the vent—alive with burrowing parasites.",
+    category: "Entropy, Mutation, Ritual & Beyond"
+  },
+  {
+    id: 220,
+    word: "Amaurotic",
+    type: "adj",
+    definition: "Blind or relating to vision loss",
+    example: "The creature’s gaze was amaurotic—but it saw in ways they couldn’t fathom.",
+    category: "Entropy, Mutation, Ritual & Beyond"
   },
 ]

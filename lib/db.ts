@@ -9,12 +9,15 @@ export type WordEntry = {
   category: string
 }
 
+// Update the UserProgress type to include collections
 export type UserProgress = {
-  id?: string
+  id: string
   correct: number[]
   incorrect: number[]
   attempted: number[]
   learned: number[]
+  favorites: number[] // Added favorites array
+  collections: Collection[] // Added collections array
   streakDays: number
   lastPlayed: string
   totalScore: number
@@ -22,12 +25,15 @@ export type UserProgress = {
   level: number
   experience: number
   testHistory: TestResult[]
-  streak: number
-  bestStreak: number
-  totalTests: number
-  totalTimeSpent: number
-  daysActive: number
-  testResults: TestResult[]
+}
+
+// Add a new Collection type
+export type Collection = {
+  id: string
+  name: string
+  description: string
+  wordIds: number[]
+  createdAt: string
 }
 
 export type TestResult = {
@@ -128,7 +134,7 @@ export const seedDatabase = async (): Promise<void> => {
   }
 }
 
-// Initialize user progress if it doesn't exist
+// Update initUserProgress to include collections
 export const initUserProgress = async (): Promise<UserProgress> => {
   try {
     const db = await initDB()
@@ -147,6 +153,8 @@ export const initUserProgress = async (): Promise<UserProgress> => {
             incorrect: [],
             attempted: [],
             learned: [],
+            favorites: [], // Initialize favorites array
+            collections: [], // Initialize collections array
             streakDays: 0,
             lastPlayed: "",
             totalScore: 0,
@@ -154,18 +162,17 @@ export const initUserProgress = async (): Promise<UserProgress> => {
             level: 1,
             experience: 0,
             testHistory: [],
-            streak: 0,
-            bestStreak: 0,
-            totalTests: 0,
-            totalTimeSpent: 0,
-            daysActive: 0,
-            testResults: [],
           }
 
           progressStore.add(defaultProgress)
           resolve(defaultProgress)
         } else {
-          resolve(getRequest.result as UserProgress)
+          // Add collections array if it doesn't exist in existing data
+          const progress = getRequest.result as UserProgress
+          if (!progress.favorites) progress.favorites = []
+          if (!progress.collections) progress.collections = []
+          progressStore.put(progress)
+          resolve(progress)
         }
       }
 
@@ -182,6 +189,8 @@ export const initUserProgress = async (): Promise<UserProgress> => {
       incorrect: [],
       attempted: [],
       learned: [],
+      favorites: [],
+      collections: [],
       streakDays: 0,
       lastPlayed: "",
       totalScore: 0,
@@ -189,12 +198,6 @@ export const initUserProgress = async (): Promise<UserProgress> => {
       level: 1,
       experience: 0,
       testHistory: [],
-      streak: 0,
-      bestStreak: 0,
-      totalTests: 0,
-      totalTimeSpent: 0,
-      daysActive: 0,
-      testResults: [],
     }
   }
 }
@@ -211,7 +214,10 @@ export const getUserProgress = async (): Promise<UserProgress> => {
 
       getRequest.onsuccess = () => {
         if (getRequest.result) {
-          resolve(getRequest.result as UserProgress)
+          const progress = getRequest.result as UserProgress
+          // Ensure favorites exists
+          if (!progress.favorites) progress.favorites = []
+          resolve(progress)
         } else {
           // If no progress exists, initialize it
           initUserProgress().then((progress) => resolve(progress))
@@ -296,6 +302,17 @@ export const getWordsByCategory = async (category: string): Promise<WordEntry[]>
     console.error("Error getting words by category:", error)
     // Fallback to filtering static data
     return wordData.filter((word) => word.category === category)
+  }
+}
+
+// Get words by IDs
+export const getWordsByIds = async (ids: number[]): Promise<WordEntry[]> => {
+  try {
+    const allWords = await getAllWords()
+    return allWords.filter((word) => ids.includes(word.id))
+  } catch (error) {
+    console.error("Error getting words by IDs:", error)
+    return []
   }
 }
 

@@ -31,12 +31,19 @@ import {
   SplitSquareVertical,
   Keyboard,
   Puzzle,
+  Sparkles,
+  Clock,
+  Target,
+  Lightbulb,
+  Rocket,
+  Crown,
+  Folder,
+  FolderPlus,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import confetti from "canvas-confetti"
 import { useTheme } from "next-themes"
 import { v4 as uuidv4 } from "uuid"
-import { useRouter } from "next/navigation"
 
 import { useDatabase } from "@/hooks/use-db"
 import type { WordEntry, TestType } from "@/lib/db"
@@ -47,6 +54,10 @@ import SpellingTest from "@/components/test-types/spelling-test"
 import RapidFireTest from "@/components/test-types/rapid-fire-test"
 import TestSelector from "@/components/test-selector"
 import TestResults from "@/components/test-results"
+import Dashboard from "@/components/dashboard"
+import FavoritesSection from "@/components/favorites-section"
+import CollectionsSection from "@/components/collections-section"
+import CollectionView from "@/components/collection-view"
 
 type Achievement = {
   id: string
@@ -71,9 +82,11 @@ export default function FlashcardGame() {
   const [testTotalPossible, setTestTotalPossible] = useState(0)
   const [testTimeSpent, setTestTimeSpent] = useState(0)
   const [showTestResults, setShowTestResults] = useState(false)
+  const [showDashboard, setShowDashboard] = useState(false)
+  const [selectedCollectionId, setSelectedCollectionId] = useState<string | null>(null)
+  const [showCollectionDropdown, setShowCollectionDropdown] = useState(false)
   const { theme } = useTheme()
   const confettiRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
 
   const {
     isLoading,
@@ -82,9 +95,13 @@ export default function FlashcardGame() {
     words,
     updateProgress,
     toggleLearnedWord,
+    toggleFavoriteWord,
     recordTestResult,
     fetchWordsByCategory,
+    getFavoriteWords,
     checkAndUpdateStreak,
+    getCollectionWords,
+    addWordToCollection,
   } = useDatabase()
 
   // Initialize data
@@ -124,7 +141,14 @@ export default function FlashcardGame() {
         })
       }
     }
-  }, [userProgress?.correct, userProgress?.learned, userProgress, updateProgress])
+  }, [
+    userProgress?.correct,
+    userProgress?.learned,
+    userProgress?.favorites,
+    userProgress?.testHistory,
+    userProgress,
+    updateProgress,
+  ])
 
   const filterWords = async () => {
     // Force a fresh fetch from the database
@@ -143,6 +167,14 @@ export default function FlashcardGame() {
     }
   }
 
+  // Go to specific word by index
+  const goToWord = (index: number) => {
+    if (index >= 0 && index < filteredWords.length) {
+      setIsFlipped(false)
+      setCurrentWordIndex(index)
+    }
+  }
+
   // Handle test selection
   const handleSelectTest = (selectedTestType: TestType, selectedDifficulty: "easy" | "medium" | "hard") => {
     setTestType(selectedTestType)
@@ -151,6 +183,22 @@ export default function FlashcardGame() {
 
     // Force a refresh of the filtered words
     filterWords()
+  }
+
+  // Handle collection selection
+  const handleSelectCollection = async (collectionId: string) => {
+    setSelectedCollectionId(collectionId)
+  }
+
+  // Handle starting a test for a collection
+  const handleStartCollectionTest = async (collectionId: string) => {
+    const collectionWords = await getCollectionWords(collectionId)
+    setFilteredWords(collectionWords)
+    setCurrentWordIndex(0)
+    setActiveTab("test")
+    setShowTestSelector(true)
+    // Store the collection ID to maintain context during testing
+    sessionStorage.setItem("testingCollectionId", collectionId)
   }
 
   // Handle test completion
@@ -211,13 +259,31 @@ export default function FlashcardGame() {
     }
   }
 
+  // Handle favorite toggle
+  const handleFavoriteToggle = async (wordId: number) => {
+    await toggleFavoriteWord(wordId)
+  }
+
+  // Handle adding word to collection
+  const handleAddToCollection = async (wordId: number, collectionId: string) => {
+    try {
+      await addWordToCollection(wordId, collectionId)
+      // Show feedback to the user
+      alert(`Word added to collection successfully!`)
+      setShowCollectionDropdown(false)
+    } catch (err) {
+      console.error("Error adding word to collection:", err)
+      alert("Failed to add word to collection. Please try again.")
+    }
+  }
+
   // Get unique categories
   const categories = Array.from(new Set(words.map((word) => word.category)))
 
   // Calculate level progress
   const levelProgress = userProgress ? (userProgress.experience / (userProgress.level * 100)) * 100 : 0
 
-  // Achievements
+  // Achievements - expanded list
   const achievements: Achievement[] = [
     {
       id: "first_correct",
@@ -253,6 +319,67 @@ export default function FlashcardGame() {
       description: "Reach level 5",
       icon: <Star className="h-6 w-6 text-yellow-500" />,
       condition: (progress) => progress.level >= 5,
+    },
+    // New achievements
+    {
+      id: "first_favorite",
+      title: "Personal Collection",
+      description: "Add your first favorite word",
+      icon: <Heart className="h-6 w-6 text-pink-500" />,
+      condition: (progress) => progress?.favorites?.length > 0,
+    },
+    {
+      id: "ten_favorites",
+      title: "Word Collector",
+      description: "Add 10 words to favorites",
+      icon: <Sparkles className="h-6 w-6 text-purple-500" />,
+      condition: (progress) => progress?.favorites?.length >= 10,
+    },
+    {
+      id: "first_collection",
+      title: "Organizer",
+      description: "Create your first collection",
+      icon: <Folder className="h-6 w-6 text-emerald-500" />,
+      condition: (progress) => progress?.collections?.length > 0,
+    },
+    {
+      id: "speed_demon",
+      title: "Speed Demon",
+      description: "Complete a test in under 30 seconds",
+      icon: <Clock className="h-6 w-6 text-blue-500" />,
+      condition: (progress) => progress.testHistory.some((test) => test.timeSpent < 30),
+    },
+    {
+      id: "perfect_score",
+      title: "Perfect Score",
+      description: "Get 100% on any test",
+      icon: <Target className="h-6 w-6 text-red-500" />,
+      condition: (progress) =>
+        progress.testHistory.some((test) => test.score === test.totalPossible && test.totalPossible > 0),
+    },
+    {
+      id: "test_variety",
+      title: "Test Explorer",
+      description: "Try 3 different test types",
+      icon: <Lightbulb className="h-6 w-6 text-amber-500" />,
+      condition: (progress) => {
+        const testTypes = new Set(progress.testHistory.map((test) => test.testType))
+        return testTypes.size >= 3
+      },
+    },
+    {
+      id: "streak_7",
+      title: "Weekly Warrior",
+      description: "Maintain a 7-day streak",
+      icon: <Rocket className="h-6 w-6 text-cyan-500" />,
+      condition: (progress) => progress.streakDays >= 7,
+    },
+    {
+      id: "level_10",
+      title: "Vocabulary Master",
+      description: "Reach level 10",
+      icon: <Crown className="h-6 w-6 text-amber-500" />,
+      condition: (progress) => progress.level >= 10,
     },
   ]
 
@@ -320,6 +447,22 @@ export default function FlashcardGame() {
     }
   }
 
+  // Show dashboard if selected
+  if (showDashboard) {
+    return <Dashboard onBack={() => setShowDashboard(false)} />
+  }
+
+  // Show collection view if a collection is selected
+  if (selectedCollectionId) {
+    return (
+      <CollectionView
+        collectionId={selectedCollectionId}
+        onBack={() => setSelectedCollectionId(null)}
+        onStartTest={() => handleStartCollectionTest(selectedCollectionId)}
+      />
+    )
+  }
+
   return (
     <div className="space-y-8" ref={confettiRef}>
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -365,23 +508,14 @@ export default function FlashcardGame() {
             </TooltipProvider>
           )}
 
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
-                  onClick={() => router.push('/dashboard')} 
-                  className="text-violet-600 dark:text-violet-400"
-                >
-                  <BarChart3 className="h-5 w-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>View Analytics Dashboard</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Button
+            variant="outline"
+            size="sm"
+            className="mr-2 border-violet-200 text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-400 dark:hover:bg-violet-900/30"
+            onClick={() => setShowDashboard(true)}
+          >
+            <BarChart3 className="h-4 w-4 mr-2" /> Dashboard
+          </Button>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full sm:w-auto">
             <TabsList className="bg-violet-100 dark:bg-violet-900/50">
@@ -390,6 +524,18 @@ export default function FlashcardGame() {
                 className="data-[state=active]:bg-violet-600 data-[state=active]:text-white dark:data-[state=active]:bg-violet-700"
               >
                 <BookOpen className="h-4 w-4 mr-2" /> Learn
+              </TabsTrigger>
+              <TabsTrigger
+                value="favorites"
+                className="data-[state=active]:bg-pink-600 data-[state=active]:text-white dark:data-[state=active]:bg-pink-700"
+              >
+                <Heart className="h-4 w-4 mr-2" /> Favorites
+              </TabsTrigger>
+              <TabsTrigger
+                value="collections"
+                className="data-[state=active]:bg-emerald-600 data-[state=active]:text-white dark:data-[state=active]:bg-emerald-700"
+              >
+                <Folder className="h-4 w-4 mr-2" /> Collections
               </TabsTrigger>
               <TabsTrigger
                 value="test"
@@ -427,6 +573,38 @@ export default function FlashcardGame() {
             </Badge>
           ))}
         </div>
+      )}
+
+      {activeTab === "learn" && filteredWords.length > 0 && (
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-sm font-medium">Go to word:</span>
+          <select
+            className="rounded-md border border-input bg-background px-3 py-1 text-sm"
+            value={currentWordIndex}
+            onChange={(e) => goToWord(Number.parseInt(e.target.value))}
+          >
+            {filteredWords.map((word, index) => (
+              <option key={word.id} value={index}>
+                {index + 1}. {word.word}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {/* Favorites Section */}
+      {activeTab === "favorites" && (
+        <FavoritesSection
+          onStartTest={() => {
+            setActiveTab("test")
+            setShowTestSelector(true)
+          }}
+        />
+      )}
+
+      {/* Collections Section */}
+      {activeTab === "collections" && (
+        <CollectionsSection onSelectCollection={handleSelectCollection} onStartTest={handleStartCollectionTest} />
       )}
 
       {/* Test Selector */}
@@ -507,16 +685,58 @@ export default function FlashcardGame() {
                           >
                             <Volume2 className="h-5 w-5" />
                           </Button>
+                          <div className="relative">
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="text-emerald-600 dark:text-emerald-400"
+                              onClick={() => setShowCollectionDropdown(!showCollectionDropdown)}
+                            >
+                              <FolderPlus className="h-5 w-5" />
+                            </Button>
+                            {showCollectionDropdown && userProgress?.collections?.length > 0 && (
+                              <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10">
+                                <div className="py-1">
+                                  <p className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    Add to collection:
+                                  </p>
+                                  {userProgress.collections.map((collection) => (
+                                    <button
+                                      key={collection.id}
+                                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                      onClick={() =>
+                                        handleAddToCollection(filteredWords[currentWordIndex]?.id, collection.id)
+                                      }
+                                    >
+                                      {collection.name}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className={`${userProgress?.learned.includes(filteredWords[currentWordIndex]?.id || 0) ? "text-pink-500" : "text-gray-400 dark:text-gray-500"}`}
-                            onClick={() => toggleLearnedWord(filteredWords[currentWordIndex]?.id || 0)}
+                            className={`${userProgress?.favorites?.includes(filteredWords[currentWordIndex]?.id || 0) ? "text-pink-500" : "text-gray-400 dark:text-gray-500"}`}
+                            onClick={() => handleFavoriteToggle(filteredWords[currentWordIndex]?.id || 0)}
                           >
-                            {userProgress?.learned.includes(filteredWords[currentWordIndex]?.id || 0) ? (
+                            {userProgress?.favorites?.includes(filteredWords[currentWordIndex]?.id || 0) ? (
                               <Heart className="h-5 w-5 fill-pink-500" />
                             ) : (
                               <Heart className="h-5 w-5" />
+                            )}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className={`${userProgress?.learned.includes(filteredWords[currentWordIndex]?.id || 0) ? "text-emerald-500" : "text-gray-400 dark:text-gray-500"}`}
+                            onClick={() => toggleLearnedWord(filteredWords[currentWordIndex]?.id || 0)}
+                          >
+                            {userProgress?.learned.includes(filteredWords[currentWordIndex]?.id || 0) ? (
+                              <CheckCircle className="h-5 w-5 fill-emerald-500" />
+                            ) : (
+                              <CheckCircle className="h-5 w-5" />
                             )}
                           </Button>
                         </div>
@@ -713,10 +933,10 @@ export default function FlashcardGame() {
                   <p className="text-2xl font-bold">{userProgress.learned.length}</p>
                 </div>
                 <div className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 shadow-sm">
-                  <h3 className="font-medium text-amber-800 dark:text-amber-300 flex items-center gap-2">
-                    <Star className="h-4 w-4" /> Level
+                  <h3 className="font-medium text-pink-800 dark:text-pink-300 flex items-center gap-2">
+                    <Heart className="h-4 w-4" /> Favorites
                   </h3>
-                  <p className="text-2xl font-bold">{userProgress.level}</p>
+                  <p className="text-2xl font-bold">{userProgress.favorites?.length || 0}</p>
                 </div>
               </div>
 
@@ -724,7 +944,7 @@ export default function FlashcardGame() {
                 <h3 className="font-medium text-violet-800 dark:text-violet-300 mb-2 flex items-center gap-2">
                   <Award className="h-4 w-4" /> Achievements ({userProgress.achievements.length}/{achievements.length})
                 </h3>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2 max-h-[200px] overflow-y-auto">
                   {achievements.map((achievement) => (
                     <div
                       key={achievement.id}
