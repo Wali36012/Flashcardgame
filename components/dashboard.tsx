@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
@@ -24,12 +24,42 @@ import {
   LineChart,
   BarChart,
   PieChart,
-  LayoutDashboard
+  LayoutDashboard,
+  ArrowDownRight,
+  AlertTriangle,
+  CheckCircle,
+  Activity
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useDatabase } from "@/hooks/use-db"
 import { useRouter } from "next/navigation"
-import type { TestResult } from "@/lib/db"
+import type { TestResult, WordEntry } from "@/lib/db"
+// Recharts components
+import {
+  ResponsiveContainer,
+  LineChart as RechartsLineChart,
+  Line,
+  BarChart as RechartsBarChart,
+  Bar,
+  PieChart as RechartsPieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip as RechartsTooltip,
+  Legend,
+  AreaChart,
+  Area,
+  RadarChart,
+  Radar,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  ScatterChart,
+  Scatter,
+  Sector
+} from "recharts"
 
 interface Achievement {
   id: string
@@ -40,9 +70,29 @@ interface Achievement {
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview")
+  const [timeRange, setTimeRange] = useState<"week" | "month" | "year">("month")
   const { userProgress, words, isLoading } = useDatabase()
   const { theme } = useTheme()
   const router = useRouter()
+
+  // Helper function to format test type names
+  const formatTestTypeName = (type: string) => {
+    return type.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+  }
+
+  // Define chart colors for consistency
+  const CHART_COLORS = {
+    primary: '#8884d8',
+    secondary: '#82ca9d',
+    tertiary: '#ffc658',
+    quaternary: '#ff8042',
+    quinary: '#0088FE',
+    accents: ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#0088FE', '#00C49F', '#FFBB28']
+  };
+  
+  useEffect(() => {
+    // Handle additional data processing for time-based filtering if needed
+  }, [timeRange, userProgress]);
 
   if (isLoading || !userProgress) {
     return (
@@ -105,7 +155,7 @@ export default function Dashboard() {
   }
 
   // Calculate category distribution
-  const categoryDistribution = words.reduce((acc: Record<string, {total: number, learned: number}>, word) => {
+  const categoryDistribution = words.reduce((acc: Record<string, {total: number, learned: number}>, word: WordEntry) => {
     const category = word.category || 'Uncategorized'
     
     if (!acc[category]) {
@@ -242,7 +292,7 @@ export default function Dashboard() {
             <CardContent>
               {recentTests.length > 0 ? (
                 <div className="space-y-4">
-                  {recentTests.slice(0, 5).map((test, index) => (
+                  {recentTests.slice(0, 5).map((test: TestResult, index: number) => (
                     <div key={index} className="flex items-center gap-4">
                       <div className="bg-muted rounded-full p-2">
                         {test.testType === 'multipleChoice' && <Brain className="h-4 w-4" />}
@@ -253,8 +303,7 @@ export default function Dashboard() {
                       </div>
                       <div className="flex-1">
                         <p className="text-sm font-medium">
-                          {test.testType.replace(/([A-Z])/g, ' $1')
-                            .replace(/^./, str => str.toUpperCase())} Test
+                          {formatTestTypeName(test.testType)} Test
                         </p>
                         <p className="text-xs text-muted-foreground">
                           {new Date(test.date).toLocaleDateString()} · Score: {test.score}/{test.totalPossible}
@@ -359,6 +408,35 @@ export default function Dashboard() {
         </TabsContent>
 
         <TabsContent value="analytics" className="space-y-6">
+          <div className="flex justify-end mb-4">
+            <div className="inline-flex p-1 rounded-md bg-muted">
+              <Button
+                variant={timeRange === "week" ? "default" : "ghost"}
+                size="sm"
+                className="text-xs"
+                onClick={() => setTimeRange("week")}
+              >
+                Week
+              </Button>
+              <Button
+                variant={timeRange === "month" ? "default" : "ghost"}
+                size="sm"
+                className="text-xs"
+                onClick={() => setTimeRange("month")}
+              >
+                Month
+              </Button>
+              <Button
+                variant={timeRange === "year" ? "default" : "ghost"}
+                size="sm"
+                className="text-xs"
+                onClick={() => setTimeRange("year")}
+              >
+                Year
+              </Button>
+            </div>
+          </div>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
@@ -366,7 +444,43 @@ export default function Dashboard() {
                 <CardDescription>Completion percentage by category</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RechartsPieChart>
+                      <Pie
+                        data={Object.entries(categoryDistribution).map(([category, data]) => ({
+                          name: category,
+                          value: data.learned,
+                          total: data.total,
+                          percentage: Math.round((data.learned / data.total) * 100),
+                        }))}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={true}
+                        outerRadius={80}
+                        fill="#8884d8"
+                        dataKey="value"
+                        nameKey="name"
+                        label={({ name, percentage }) => `${name}: ${percentage}%`}
+                      >
+                        {Object.entries(categoryDistribution).map(([category, data], index: number) => {
+                          const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#0088FE', '#00C49F', '#FFBB28'];
+                          return (
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                          );
+                        })}
+                      </Pie>
+                      <RechartsTooltip 
+                        formatter={(value, name, props) => [
+                          `${value}/${props.payload.total} (${props.payload.percentage}%)`, 
+                          name
+                        ]} 
+                      />
+                      <Legend />
+                    </RechartsPieChart>
+                  </ResponsiveContainer>
+                </div>
+                <div className="space-y-4 mt-4">
                   {Object.entries(categoryDistribution).map(([category, data]) => {
                     const percentage = Math.round((data.learned / data.total) * 100) || 0
                     return (
@@ -375,10 +489,7 @@ export default function Dashboard() {
                           <span className="text-sm font-medium">{category}</span>
                           <span className="text-sm text-muted-foreground">{data.learned}/{data.total}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Progress value={percentage} className="h-2" />
-                          <span className="text-xs">{percentage}%</span>
-                        </div>
+                        <Progress value={percentage} className="h-2" />
                       </div>
                     )
                   })}
@@ -392,46 +503,33 @@ export default function Dashboard() {
                 <CardDescription>Types of tests you've taken</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-[250px] flex items-center justify-center">
-                  <div className="flex flex-col gap-4 w-full">
-                    {Object.entries(testTypeDistribution).length > 0 ? (
-                      Object.entries(testTypeDistribution).map(([type, count]) => {
-                        const percentage = Math.round((count as number / userProgress.totalTests) * 100)
-                        const getColor = () => {
-                          switch(type) {
-                            case 'multipleChoice': return 'bg-blue-500'
-                            case 'fillBlank': return 'bg-green-500'
-                            case 'matching': return 'bg-yellow-500'
-                            case 'spelling': return 'bg-purple-500'
-                            case 'rapidFire': return 'bg-red-500'
-                            default: return 'bg-gray-500'
-                          }
-                        }
-                        
-                        return (
-                          <div key={type} className="space-y-1">
-                            <div className="flex justify-between text-sm">
-                              <span className="capitalize">
-                                {type.replace(/([A-Z])/g, ' $1')
-                                  .replace(/^./, str => str.toUpperCase())}
-                              </span>
-                              <span>{count} tests</span>
-                            </div>
-                            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                              <div 
-                                className={`h-2.5 rounded-full ${getColor()}`} 
-                                style={{ width: `${percentage}%` }}>
-                              </div>
-                            </div>
-                          </div>
-                        )
-                      })
-                    ) : (
-                      <div className="text-center text-muted-foreground">
-                        No test data available
-                      </div>
-                    )}
-                  </div>
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RechartsBarChart
+                      data={Object.entries(testTypeDistribution).map(([type, count]) => ({
+                        name: formatTestTypeName(type),
+                        value: count,
+                        percentage: Math.round((count as number / (userProgress.totalTests || 1)) * 100)
+                      }))}
+                      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis />
+                      <RechartsTooltip
+                        formatter={(value, name, props) => [
+                          `${value} tests (${props.payload.percentage}%)`,
+                          "Count"
+                        ]}
+                      />
+                      <Bar dataKey="value" fill="#8884d8" radius={[4, 4, 0, 0]}>
+                        {Object.entries(testTypeDistribution).map((entry, index: number) => {
+                          const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#0088FE'];
+                          return <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />;
+                        })}
+                      </Bar>
+                    </RechartsBarChart>
+                  </ResponsiveContainer>
                 </div>
               </CardContent>
             </Card>
@@ -442,30 +540,60 @@ export default function Dashboard() {
                 <CardDescription>Your activity over the last 30 days</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-[200px] flex">
-                  <div className="flex items-end w-full gap-1">
-                    {Object.entries(dailyActivity)
-                      .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime())
-                      .slice(-30)
-                      .map(([date, count]) => {
-                        const height = count ? Math.max(20, Math.min(100, (count as number) * 20)) : 4
-                        const alpha = count ? Math.min(1, (count as number) * 0.2 + 0.5) : 0.1
-                        const day = new Date(date).getDate()
-                        
-                        return (
-                          <div key={date} className="flex flex-col items-center flex-1">
-                            <div 
-                              className="w-full bg-violet-500 dark:bg-violet-600 rounded-t" 
-                              style={{ 
-                                height: `${height}px`,
-                                opacity: alpha
-                              }}>
-                            </div>
-                            <span className="text-xs mt-1">{day}</span>
-                          </div>
-                        )
-                    })}
-                  </div>
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart
+                      data={Object.entries(dailyActivity)
+                        .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime())
+                        .slice(-30)
+                        .map(([date, count]) => ({
+                          date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                          count: count,
+                          fullDate: date,
+                        }))}
+                      margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                    >
+                      <defs>
+                        <linearGradient id="colorActivity" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                          <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                      <XAxis dataKey="date" />
+                      <YAxis />
+                      <RechartsTooltip
+                        formatter={(value, name, props) => [`${value} tests`, 'Activity']}
+                        labelFormatter={(label) => {
+                          const item = Object.entries(dailyActivity)
+                            .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime())
+                            .slice(-30)
+                            .map(([date, count]) => ({
+                              date: new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                              fullDate: date,
+                            }))
+                            .find(item => item.date === label);
+                            
+                          if (item) {
+                            return new Date(item.fullDate).toLocaleDateString('en-US', { 
+                              weekday: 'long',
+                              year: 'numeric', 
+                              month: 'long', 
+                              day: 'numeric' 
+                            });
+                          }
+                          return label;
+                        }}
+                      />
+                      <Area 
+                        type="monotone" 
+                        dataKey="count" 
+                        stroke="#8884d8" 
+                        fillOpacity={1} 
+                        fill="url(#colorActivity)" 
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               </CardContent>
             </Card>
@@ -475,22 +603,67 @@ export default function Dashboard() {
                 <CardTitle>Learning Rate</CardTitle>
                 <CardDescription>Words learned per day on average</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-center flex-col h-[200px]">
-                  <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
-                    {userProgress.learned.length > 0 ? 
-                      (userProgress.learned.length / Math.max(userProgress.daysActive, 1)).toFixed(1) : 
-                      "0.0"}
-                  </div>
-                  <p className="text-sm text-muted-foreground">words/day</p>
-                  
-                  <div className="mt-4 flex items-center gap-1 text-sm">
-                    <ArrowUpRight className={`h-4 w-4 ${recentWordsLearned > 0 ? "text-green-500" : "text-red-500"}`} /> 
-                    <span className={recentWordsLearned > 0 ? "text-green-500" : "text-red-500"}>
-                      {recentWordsLearned > 0 ? "+" : ""}{recentWordsLearned}
+              <CardContent className="pt-2">
+                <div className="h-[250px] flex items-center justify-center relative">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RechartsPieChart>
+                      <Pie
+                        data={[
+                          { name: 'Learned', value: userProgress.learned.length, fill: '#8884d8' },
+                          { name: 'Remaining', value: Math.max(totalWords - userProgress.learned.length, 0), fill: '#f3f4f6' }
+                        ]}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={80}
+                        startAngle={90}
+                        endAngle={-270}
+                        dataKey="value"
+                      />
+                    </RechartsPieChart>
+                  </ResponsiveContainer>
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-4xl font-bold text-violet-600 dark:text-violet-400">
+                      {userProgress.learned.length > 0 ? 
+                        (userProgress.learned.length / Math.max(userProgress.daysActive, 1)).toFixed(1) : 
+                        "0.0"}
                     </span>
-                    <span className="text-muted-foreground">this week</span>
+                    <span className="text-sm text-muted-foreground">words/day</span>
                   </div>
+                </div>
+                
+                <div className="mt-6 px-2">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium">Weekly Change</span>
+                    </div>
+                    <div className={`flex items-center gap-1 ${recentWordsLearned > 0 ? "text-green-500" : "text-red-500"}`}>
+                      {recentWordsLearned > 0 ? (
+                        <ArrowUpRight className="h-4 w-4" />
+                      ) : (
+                        <ArrowDownRight className="h-4 w-4" />
+                      )}
+                      <span className="text-sm font-medium">
+                        {recentWordsLearned > 0 ? "+" : ""}{recentWordsLearned}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium">Completion</span>
+                    </div>
+                    <span className="text-sm font-medium">{completionPercentage}%</span>
+                  </div>
+                  <Progress 
+                    value={completionPercentage} 
+                    className="h-2 mt-1 mb-4" 
+                    indicatorClassName={`${
+                      completionPercentage < 20 ? 'bg-red-500' :
+                      completionPercentage < 50 ? 'bg-yellow-500' :
+                      completionPercentage < 80 ? 'bg-blue-500' : 'bg-green-500'
+                    }`}
+                  />
                 </div>
               </CardContent>
             </Card>
@@ -498,25 +671,190 @@ export default function Dashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Test Efficiency</CardTitle>
-                <CardDescription>Average time spent per correct answer</CardDescription>
+                <CardDescription>Performance metrics on your tests</CardDescription>
+              </CardHeader>
+              <CardContent className="pt-2">
+                {userProgress.totalScore > 0 && userProgress.totalTimeSpent > 0 ? (
+                  <>
+                    <div className="flex flex-col space-y-6 mt-2">
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center">
+                            <Clock className="w-4 h-4 mr-2 text-blue-500" />
+                            <span className="text-sm font-medium">Time per Answer</span>
+                          </div>
+                          <span className="text-lg font-bold">{(userProgress.totalTimeSpent / userProgress.totalScore).toFixed(1)}s</span>
+                        </div>
+                        <div className="relative pt-1">
+                          <div className="overflow-hidden h-2 text-xs flex rounded bg-blue-100 dark:bg-blue-900/30">
+                            <div 
+                              className="bg-blue-500 rounded-r"
+                              style={{ width: `${Math.min(100, ((userProgress.totalTimeSpent / userProgress.totalScore) / 10) * 100)}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center">
+                            <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
+                            <span className="text-sm font-medium">Accuracy Rate</span>
+                          </div>
+                          <span className="text-lg font-bold">{testAccuracy}%</span>
+                        </div>
+                        <div className="relative pt-1">
+                          <div className="overflow-hidden h-2 text-xs flex rounded bg-green-100 dark:bg-green-900/30">
+                            <div 
+                              className="bg-green-500 rounded-r"
+                              style={{ width: `${testAccuracy}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center">
+                            <Activity className="w-4 h-4 mr-2 text-violet-500" />
+                            <span className="text-sm font-medium">Test Completion</span>
+                          </div>
+                          <span className="text-lg font-bold">
+                            {userProgress.totalTests || 0}
+                          </span>
+                        </div>
+                        <div className="grid grid-cols-5 gap-1">
+                          {Array.from({ length: 5 }).map((_, i: number) => (
+                            <div 
+                              key={i} 
+                              className={`h-2 rounded ${
+                                i < Math.min(5, Math.floor(userProgress.totalTests / 5)) 
+                                  ? 'bg-violet-500' 
+                                  : 'bg-violet-100 dark:bg-violet-900/30'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="border-t dark:border-gray-800 pt-4">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-muted-foreground">Total time spent</span>
+                          <span className="font-medium">{Math.round(userProgress.totalTimeSpent / 60)} min</span>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex items-center justify-center h-[200px] flex-col">
+                    <AlertTriangle className="h-8 w-8 text-muted-foreground mb-2" />
+                    <p className="text-muted-foreground">No test data available</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Skill Breakdown Analysis</CardTitle>
+                <CardDescription>Visual representation of your strengths across test types</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-center flex-col h-[200px]">
-                  {userProgress.totalScore > 0 && userProgress.totalTimeSpent > 0 ? (
-                    <>
-                      <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400">
-                        {(userProgress.totalTimeSpent / userProgress.totalScore).toFixed(1)}
-                      </div>
-                      <p className="text-sm text-muted-foreground">seconds per correct answer</p>
-                      
-                      <div className="mt-4 text-sm text-muted-foreground flex items-center">
-                        <Clock className="h-4 w-4 mr-1" />
-                        <span>Total time: {Math.round(userProgress.totalTimeSpent / 60)} minutes</span>
-                      </div>
-                    </>
-                  ) : (
-                    <p className="text-muted-foreground">No test data available</p>
-                  )}
+                <div className="h-[400px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RadarChart cx="50%" cy="50%" outerRadius="80%" data={
+                      Object.entries(testTypeDistribution).map(([type, count]) => {
+                        // Calculate score percentage for this test type
+                        const testResults = userProgress.testResults?.filter(
+                          (test: TestResult) => test.testType === type
+                        ) || [];
+                        
+                        const totalScore = testResults.reduce(
+                          (sum: number, test: TestResult) => sum + test.score, 0
+                        );
+                        
+                        const totalPossible = testResults.reduce(
+                          (sum: number, test: TestResult) => sum + test.totalPossible, 0
+                        );
+                        
+                        const scorePercentage = totalPossible > 0 
+                          ? Math.round((totalScore / totalPossible) * 100) 
+                          : 0;
+                        
+                        return {
+                          subject: formatTestTypeName(type),
+                          A: scorePercentage,
+                          B: count,
+                          fullMark: 100
+                        };
+                      })
+                    }>
+                      <PolarGrid />
+                      <PolarAngleAxis dataKey="subject" />
+                      <PolarRadiusAxis angle={30} domain={[0, 100]} />
+                      <Radar name="Accuracy" dataKey="A" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+                      <Legend />
+                      <RechartsTooltip formatter={(value, name) => [`${value}%`, name === 'A' ? 'Accuracy' : 'Tests']} />
+                    </RadarChart>
+                  </ResponsiveContainer>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Learning Pattern Analysis</CardTitle>
+                <CardDescription>Your learning effectiveness over time</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <RechartsLineChart
+                      data={(() => {
+                        // Create data for last 10 tests
+                        const testData = [...(userProgress.testResults || [])]
+                          .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+                          .slice(-10)
+                          .map((test, index) => {
+                            const accuracy = Math.round((test.score / test.totalPossible) * 100);
+                            const efficiency = test.timeSpent / test.score;
+                            return {
+                              name: `Test ${index + 1}`,
+                              date: new Date(test.date).toLocaleDateString(),
+                              accuracy: accuracy,
+                              efficiency: Math.round(efficiency * 10) / 10,
+                              type: formatTestTypeName(test.testType),
+                            };
+                          });
+                        return testData;
+                      })()}
+                      margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="name" />
+                      <YAxis yAxisId="left" domain={[0, 100]} />
+                      <YAxis yAxisId="right" orientation="right" domain={[0, 'dataMax + 5']} />
+                      <RechartsTooltip 
+                        formatter={(value, name, props) => {
+                          if (name === 'accuracy') return [`${value}%`, 'Accuracy'];
+                          if (name === 'efficiency') return [`${value}s`, 'Seconds per answer'];
+                          return [value, name];
+                        }}
+                        labelFormatter={(label, items) => {
+                          const item = items[0]?.payload;
+                          if (item) {
+                            return `${item.date} - ${item.type}`;
+                          }
+                          return label;
+                        }}
+                      />
+                      <Legend />
+                      <Line yAxisId="left" type="monotone" dataKey="accuracy" stroke="#8884d8" name="Accuracy" />
+                      <Line yAxisId="right" type="monotone" dataKey="efficiency" stroke="#82ca9d" name="Efficiency" />
+                    </RechartsLineChart>
+                  </ResponsiveContainer>
                 </div>
               </CardContent>
             </Card>

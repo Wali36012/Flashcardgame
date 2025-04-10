@@ -10,6 +10,7 @@ export type WordEntry = {
 }
 
 export type UserProgress = {
+  id?: string
   correct: number[]
   incorrect: number[]
   attempted: number[]
@@ -21,6 +22,12 @@ export type UserProgress = {
   level: number
   experience: number
   testHistory: TestResult[]
+  streak: number
+  bestStreak: number
+  totalTests: number
+  totalTimeSpent: number
+  daysActive: number
+  testResults: TestResult[]
 }
 
 export type TestResult = {
@@ -147,6 +154,12 @@ export const initUserProgress = async (): Promise<UserProgress> => {
             level: 1,
             experience: 0,
             testHistory: [],
+            streak: 0,
+            bestStreak: 0,
+            totalTests: 0,
+            totalTimeSpent: 0,
+            daysActive: 0,
+            testResults: [],
           }
 
           progressStore.add(defaultProgress)
@@ -176,6 +189,12 @@ export const initUserProgress = async (): Promise<UserProgress> => {
       level: 1,
       experience: 0,
       testHistory: [],
+      streak: 0,
+      bestStreak: 0,
+      totalTests: 0,
+      totalTimeSpent: 0,
+      daysActive: 0,
+      testResults: [],
     }
   }
 }
