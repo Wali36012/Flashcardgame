@@ -1,11 +1,12 @@
 "use client"
 
 import React, { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
   BarChart3,
   Trophy,
@@ -17,10 +18,17 @@ import {
   Calendar,
   Clock,
   TrendingUp,
-  Award
+  Award,
+  ChevronLeft,
+  ArrowUpRight,
+  LineChart,
+  BarChart,
+  PieChart,
+  LayoutDashboard
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useDatabase } from "@/hooks/use-db"
+import { useRouter } from "next/navigation"
 import type { TestResult } from "@/lib/db"
 
 interface Achievement {
@@ -34,6 +42,7 @@ export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview")
   const { userProgress, words, isLoading } = useDatabase()
   const { theme } = useTheme()
+  const router = useRouter()
 
   if (isLoading || !userProgress) {
     return (
@@ -67,13 +76,67 @@ export default function Dashboard() {
   const xpToNextLevel = currentLevel * 100
   const levelProgress = Math.round((currentXP / xpToNextLevel) * 100)
 
+  // Analytics data
+  const testTypeDistribution = userProgress.testResults ? userProgress.testResults.reduce((acc: Record<string, number>, test: TestResult) => {
+    acc[test.testType] = (acc[test.testType] || 0) + 1
+    return acc
+  }, {}) : {}
+
+  // Daily activity data
+  const last30Days = Array.from({ length: 30 }, (_, i) => {
+    const date = new Date()
+    date.setDate(date.getDate() - i)
+    return date.toISOString().split('T')[0]
+  })
+
+  const dailyActivity = last30Days.reduce((acc: Record<string, number>, date) => {
+    acc[date] = 0
+    return acc
+  }, {})
+
+  // Fill in activity data
+  if (userProgress.testResults) {
+    userProgress.testResults.forEach((test: TestResult) => {
+      const testDate = new Date(test.date).toISOString().split('T')[0]
+      if (dailyActivity[testDate] !== undefined) {
+        dailyActivity[testDate] += 1
+      }
+    })
+  }
+
+  // Calculate category distribution
+  const categoryDistribution = words.reduce((acc: Record<string, {total: number, learned: number}>, word) => {
+    const category = word.category || 'Uncategorized'
+    
+    if (!acc[category]) {
+      acc[category] = {total: 0, learned: 0}
+    }
+    
+    acc[category].total += 1
+    
+    if (userProgress.learned.includes(word.id)) {
+      acc[category].learned += 1
+    }
+    
+    return acc
+  }, {})
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="mb-2" 
+            onClick={() => router.push('/')}
+          >
+            <ChevronLeft className="mr-1 h-4 w-4" />
+            Back to Flashcards
+          </Button>
+          <h2 className="text-3xl font-bold tracking-tight">Analytics Dashboard</h2>
           <p className="text-muted-foreground">
-            Track your learning progress and achievements
+            Track your learning progress and performance metrics
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -96,9 +159,22 @@ export default function Dashboard() {
 
       <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="mb-6">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="statistics">Statistics</TabsTrigger>
-          <TabsTrigger value="achievements">Achievements</TabsTrigger>
+          <TabsTrigger value="overview">
+            <LayoutDashboard className="w-4 h-4 mr-2" />
+            Overview
+          </TabsTrigger>
+          <TabsTrigger value="statistics">
+            <BarChart className="w-4 h-4 mr-2" />
+            Statistics
+          </TabsTrigger>
+          <TabsTrigger value="analytics">
+            <LineChart className="w-4 h-4 mr-2" />
+            Analytics
+          </TabsTrigger>
+          <TabsTrigger value="achievements">
+            <Trophy className="w-4 h-4 mr-2" />
+            Achievements
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -276,6 +352,171 @@ export default function Dashboard() {
                   <span className="font-medium">
                     {((currentLevel - 1) * 100) + currentXP}
                   </span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="analytics" className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Learning Progress by Category</CardTitle>
+                <CardDescription>Completion percentage by category</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {Object.entries(categoryDistribution).map(([category, data]) => {
+                    const percentage = Math.round((data.learned / data.total) * 100) || 0
+                    return (
+                      <div key={category}>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-sm font-medium">{category}</span>
+                          <span className="text-sm text-muted-foreground">{data.learned}/{data.total}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Progress value={percentage} className="h-2" />
+                          <span className="text-xs">{percentage}%</span>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Test Type Distribution</CardTitle>
+                <CardDescription>Types of tests you've taken</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="h-[250px] flex items-center justify-center">
+                  <div className="flex flex-col gap-4 w-full">
+                    {Object.entries(testTypeDistribution).length > 0 ? (
+                      Object.entries(testTypeDistribution).map(([type, count]) => {
+                        const percentage = Math.round((count as number / userProgress.totalTests) * 100)
+                        const getColor = () => {
+                          switch(type) {
+                            case 'multipleChoice': return 'bg-blue-500'
+                            case 'fillBlank': return 'bg-green-500'
+                            case 'matching': return 'bg-yellow-500'
+                            case 'spelling': return 'bg-purple-500'
+                            case 'rapidFire': return 'bg-red-500'
+                            default: return 'bg-gray-500'
+                          }
+                        }
+                        
+                        return (
+                          <div key={type} className="space-y-1">
+                            <div className="flex justify-between text-sm">
+                              <span className="capitalize">
+                                {type.replace(/([A-Z])/g, ' $1')
+                                  .replace(/^./, str => str.toUpperCase())}
+                              </span>
+                              <span>{count} tests</span>
+                            </div>
+                            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                              <div 
+                                className={`h-2.5 rounded-full ${getColor()}`} 
+                                style={{ width: `${percentage}%` }}>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })
+                    ) : (
+                      <div className="text-center text-muted-foreground">
+                        No test data available
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="md:col-span-2">
+              <CardHeader>
+                <CardTitle>Daily Activity</CardTitle>
+                <CardDescription>Your activity over the last 30 days</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="h-[200px] flex">
+                  <div className="flex items-end w-full gap-1">
+                    {Object.entries(dailyActivity)
+                      .sort((a, b) => new Date(a[0]).getTime() - new Date(b[0]).getTime())
+                      .slice(-30)
+                      .map(([date, count]) => {
+                        const height = count ? Math.max(20, Math.min(100, (count as number) * 20)) : 4
+                        const alpha = count ? Math.min(1, (count as number) * 0.2 + 0.5) : 0.1
+                        const day = new Date(date).getDate()
+                        
+                        return (
+                          <div key={date} className="flex flex-col items-center flex-1">
+                            <div 
+                              className="w-full bg-violet-500 dark:bg-violet-600 rounded-t" 
+                              style={{ 
+                                height: `${height}px`,
+                                opacity: alpha
+                              }}>
+                            </div>
+                            <span className="text-xs mt-1">{day}</span>
+                          </div>
+                        )
+                    })}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Learning Rate</CardTitle>
+                <CardDescription>Words learned per day on average</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-center flex-col h-[200px]">
+                  <div className="text-4xl font-bold text-violet-600 dark:text-violet-400">
+                    {userProgress.learned.length > 0 ? 
+                      (userProgress.learned.length / Math.max(userProgress.daysActive, 1)).toFixed(1) : 
+                      "0.0"}
+                  </div>
+                  <p className="text-sm text-muted-foreground">words/day</p>
+                  
+                  <div className="mt-4 flex items-center gap-1 text-sm">
+                    <ArrowUpRight className={`h-4 w-4 ${recentWordsLearned > 0 ? "text-green-500" : "text-red-500"}`} /> 
+                    <span className={recentWordsLearned > 0 ? "text-green-500" : "text-red-500"}>
+                      {recentWordsLearned > 0 ? "+" : ""}{recentWordsLearned}
+                    </span>
+                    <span className="text-muted-foreground">this week</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardHeader>
+                <CardTitle>Test Efficiency</CardTitle>
+                <CardDescription>Average time spent per correct answer</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-center flex-col h-[200px]">
+                  {userProgress.totalScore > 0 && userProgress.totalTimeSpent > 0 ? (
+                    <>
+                      <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400">
+                        {(userProgress.totalTimeSpent / userProgress.totalScore).toFixed(1)}
+                      </div>
+                      <p className="text-sm text-muted-foreground">seconds per correct answer</p>
+                      
+                      <div className="mt-4 text-sm text-muted-foreground flex items-center">
+                        <Clock className="h-4 w-4 mr-1" />
+                        <span>Total time: {Math.round(userProgress.totalTimeSpent / 60)} minutes</span>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-muted-foreground">No test data available</p>
+                  )}
                 </div>
               </CardContent>
             </Card>

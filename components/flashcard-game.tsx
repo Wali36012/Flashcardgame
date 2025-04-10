@@ -36,6 +36,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import confetti from "canvas-confetti"
 import { useTheme } from "next-themes"
 import { v4 as uuidv4 } from "uuid"
+import { useRouter } from "next/navigation"
 
 import { useDatabase } from "@/hooks/use-db"
 import type { WordEntry, TestType } from "@/lib/db"
@@ -72,6 +73,7 @@ export default function FlashcardGame() {
   const [showTestResults, setShowTestResults] = useState(false)
   const { theme } = useTheme()
   const confettiRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   const {
     isLoading,
@@ -362,6 +364,24 @@ export default function FlashcardGame() {
               </Tooltip>
             </TooltipProvider>
           )}
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={() => router.push('/dashboard')} 
+                  className="text-violet-600 dark:text-violet-400"
+                >
+                  <BarChart3 className="h-5 w-5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>View Analytics Dashboard</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full sm:w-auto">
             <TabsList className="bg-violet-100 dark:bg-violet-900/50">
