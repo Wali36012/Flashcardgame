@@ -132,31 +132,6 @@ body {
   }
 }
 
-/* Add mobile-specific styles at the end of the file */
-
-/* Mobile Card Styles */
-.mobile-card {
-  font-size: 0.95rem;
-}
-
-.mobile-card .card-header {
-  padding: 0.75rem;
-}
-
-.mobile-card .card-content {
-  padding: 0.75rem;
-}
-
-.mobile-card .card-footer {
-  padding: 0.75rem;
-}
-
-@media (max-width: 640px) {
-  .card-container {
-    max-width: 100%;
-    overflow: hidden;
-  }
-
   .card-face {
     max-width: 100%;
   }
