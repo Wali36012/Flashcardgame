@@ -131,8 +131,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
-  .card-face {
-    max-width: 100%;
-  }
-}
