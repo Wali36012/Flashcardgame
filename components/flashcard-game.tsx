@@ -39,6 +39,8 @@ import {
   Crown,
   Folder,
   FolderPlus,
+  Monitor,
+  Smartphone,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import confetti from "canvas-confetti"
@@ -58,6 +60,7 @@ import Dashboard from "@/components/dashboard"
 import FavoritesSection from "@/components/favorites-section"
 import CollectionsSection from "@/components/collections-section"
 import CollectionView from "@/components/collection-view"
+import { useLocalStorage } from "@/hooks/use-local-storage"
 
 type Achievement = {
   id: string
@@ -87,6 +90,10 @@ export default function FlashcardGame() {
   const [showCollectionDropdown, setShowCollectionDropdown] = useState(false)
   const { theme } = useTheme()
   const confettiRef = useRef<HTMLDivElement>(null)
+  const [viewMode, setViewMode] = useLocalStorage<"desktop" | "mobile">(
+    "viewMode",
+    typeof window !== "undefined" && window.innerWidth < 768 ? "mobile" : "desktop",
+  )
 
   const {
     isLoading,
@@ -467,7 +474,9 @@ export default function FlashcardGame() {
     <div className="space-y-8" ref={confettiRef}>
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 text-transparent bg-clip-text">
+          <h1
+            className={`font-bold bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-400 dark:to-indigo-400 text-transparent bg-clip-text ${viewMode === "mobile" ? "text-2xl" : "text-3xl"}`}
+          >
             Vocabulary Master
           </h1>
           {userProgress && (
@@ -480,6 +489,24 @@ export default function FlashcardGame() {
           )}
         </div>
         <div className="flex items-center gap-3">
+          {/* View mode toggle */}
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-violet-200 text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-400 dark:hover:bg-violet-900/30"
+            onClick={() => setViewMode(viewMode === "desktop" ? "mobile" : "desktop")}
+          >
+            {viewMode === "desktop" ? (
+              <>
+                <Monitor className="h-4 w-4 mr-2" /> Desktop
+              </>
+            ) : (
+              <>
+                <Smartphone className="h-4 w-4 mr-2" /> Mobile
+              </>
+            )}
+          </Button>
+
           {userProgress && (
             <TooltipProvider>
               <Tooltip>
@@ -508,34 +535,38 @@ export default function FlashcardGame() {
             </TooltipProvider>
           )}
 
-          <Button
-            variant="outline"
-            size="sm"
-            className="mr-2 border-violet-200 text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-400 dark:hover:bg-violet-900/30"
-            onClick={() => setShowDashboard(true)}
-          >
-            <BarChart3 className="h-4 w-4 mr-2" /> Dashboard
-          </Button>
+          {viewMode === "desktop" && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="mr-2 border-violet-200 text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-400 dark:hover:bg-violet-900/30"
+              onClick={() => setShowDashboard(true)}
+            >
+              <BarChart3 className="h-4 w-4 mr-2" /> Dashboard
+            </Button>
+          )}
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full sm:w-auto">
-            <TabsList className="bg-violet-100 dark:bg-violet-900/50">
+            <TabsList
+              className={`bg-violet-100 dark:bg-violet-900/50 ${viewMode === "mobile" ? "grid grid-cols-4 w-full" : ""}`}
+            >
               <TabsTrigger
                 value="learn"
                 className="data-[state=active]:bg-violet-600 data-[state=active]:text-white dark:data-[state=active]:bg-violet-700"
               >
-                <BookOpen className="h-4 w-4 mr-2" /> Learn
+                <BookOpen className="h-4 w-4 mr-2" /> {viewMode === "desktop" ? "Learn" : ""}
               </TabsTrigger>
               <TabsTrigger
                 value="favorites"
                 className="data-[state=active]:bg-pink-600 data-[state=active]:text-white dark:data-[state=active]:bg-pink-700"
               >
-                <Heart className="h-4 w-4 mr-2" /> Favorites
+                <Heart className="h-4 w-4 mr-2" /> {viewMode === "desktop" ? "Favorites" : ""}
               </TabsTrigger>
               <TabsTrigger
                 value="collections"
                 className="data-[state=active]:bg-emerald-600 data-[state=active]:text-white dark:data-[state=active]:bg-emerald-700"
               >
-                <Folder className="h-4 w-4 mr-2" /> Collections
+                <Folder className="h-4 w-4 mr-2" /> {viewMode === "desktop" ? "Collections" : ""}
               </TabsTrigger>
               <TabsTrigger
                 value="test"
@@ -546,12 +577,25 @@ export default function FlashcardGame() {
                   }
                 }}
               >
-                <Brain className="h-4 w-4 mr-2" /> Test
+                <Brain className="h-4 w-4 mr-2" /> {viewMode === "desktop" ? "Test" : ""}
               </TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
       </div>
+
+      {viewMode === "mobile" && (
+        <div className="flex justify-center mt-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-violet-200 text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-400 dark:hover:bg-violet-900/30"
+            onClick={() => setShowDashboard(true)}
+          >
+            <BarChart3 className="h-4 w-4 mr-2" /> Dashboard
+          </Button>
+        </div>
+      )}
 
       {activeTab === "learn" && (
         <div className="flex flex-wrap gap-2 mb-4">
@@ -662,8 +706,10 @@ export default function FlashcardGame() {
                 transition={{ duration: 0.6, type: "spring" }}
               >
                 <div className="card-face card-front">
-                  <Card className="shadow-xl border-0 overflow-hidden bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-950 dark:to-indigo-950 dark:border-violet-800">
-                    <CardHeader className="pb-2 relative">
+                  <Card
+                    className={`shadow-xl border-0 overflow-hidden bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-950 dark:to-indigo-950 dark:border-violet-800 ${viewMode === "mobile" ? "mobile-card" : ""}`}
+                  >
+                    <CardHeader className={`pb-2 relative ${viewMode === "mobile" ? "px-3 py-3" : ""}`}>
                       <div className="flex justify-between items-center">
                         <Badge variant="outline" className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm">
                           {filteredWords[currentWordIndex]?.category || ""}
@@ -673,26 +719,28 @@ export default function FlashcardGame() {
                         </Badge>
                       </div>
                       <div className="flex justify-between items-center mt-4">
-                        <CardTitle className="text-4xl font-bold bg-gradient-to-r from-violet-700 to-indigo-700 dark:from-violet-400 dark:to-indigo-400 text-transparent bg-clip-text">
+                        <CardTitle
+                          className={`font-bold bg-gradient-to-r from-violet-700 to-indigo-700 dark:from-violet-400 dark:to-indigo-400 text-transparent bg-clip-text ${viewMode === "mobile" ? "text-2xl" : "text-4xl"}`}
+                        >
                           {filteredWords[currentWordIndex]?.word || ""}
                         </CardTitle>
                         <div className="flex gap-2">
                           <Button
                             variant="ghost"
-                            size="icon"
+                            size={viewMode === "mobile" ? "sm" : "icon"}
                             className="text-violet-600 dark:text-violet-400"
                             onClick={() => speakWord(filteredWords[currentWordIndex]?.word || "")}
                           >
-                            <Volume2 className="h-5 w-5" />
+                            <Volume2 className={viewMode === "mobile" ? "h-4 w-4" : "h-5 w-5"} />
                           </Button>
                           <div className="relative">
                             <Button
                               variant="ghost"
-                              size="icon"
+                              size={viewMode === "mobile" ? "sm" : "icon"}
                               className="text-emerald-600 dark:text-emerald-400"
                               onClick={() => setShowCollectionDropdown(!showCollectionDropdown)}
                             >
-                              <FolderPlus className="h-5 w-5" />
+                              <FolderPlus className={viewMode === "mobile" ? "h-4 w-4" : "h-5 w-5"} />
                             </Button>
                             {showCollectionDropdown && userProgress?.collections?.length > 0 && (
                               <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-md shadow-lg z-10">
@@ -717,31 +765,35 @@ export default function FlashcardGame() {
                           </div>
                           <Button
                             variant="ghost"
-                            size="icon"
+                            size={viewMode === "mobile" ? "sm" : "icon"}
                             className={`${userProgress?.favorites?.includes(filteredWords[currentWordIndex]?.id || 0) ? "text-pink-500" : "text-gray-400 dark:text-gray-500"}`}
                             onClick={() => handleFavoriteToggle(filteredWords[currentWordIndex]?.id || 0)}
                           >
                             {userProgress?.favorites?.includes(filteredWords[currentWordIndex]?.id || 0) ? (
-                              <Heart className="h-5 w-5 fill-pink-500" />
+                              <Heart className={`${viewMode === "mobile" ? "h-4 w-4" : "h-5 w-5"} fill-pink-500`} />
                             ) : (
-                              <Heart className="h-5 w-5" />
+                              <Heart className={viewMode === "mobile" ? "h-4 w-4" : "h-5 w-5"} />
                             )}
                           </Button>
                           <Button
                             variant="ghost"
-                            size="icon"
+                            size={viewMode === "mobile" ? "sm" : "icon"}
                             className={`${userProgress?.learned.includes(filteredWords[currentWordIndex]?.id || 0) ? "text-emerald-500" : "text-gray-400 dark:text-gray-500"}`}
                             onClick={() => toggleLearnedWord(filteredWords[currentWordIndex]?.id || 0)}
                           >
                             {userProgress?.learned.includes(filteredWords[currentWordIndex]?.id || 0) ? (
-                              <CheckCircle className="h-5 w-5 fill-emerald-500" />
+                              <CheckCircle
+                                className={`${viewMode === "mobile" ? "h-4 w-4" : "h-5 w-5"} fill-emerald-500`}
+                              />
                             ) : (
-                              <CheckCircle className="h-5 w-5" />
+                              <CheckCircle className={viewMode === "mobile" ? "h-4 w-4" : "h-5 w-5"} />
                             )}
                           </Button>
                         </div>
                       </div>
-                      <CardDescription className="text-lg mt-2 flex items-center">
+                      <CardDescription
+                        className={`mt-2 flex items-center ${viewMode === "mobile" ? "text-sm" : "text-lg"}`}
+                      >
                         <span>
                           {currentWordIndex + 1} of {filteredWords.length}
                         </span>
@@ -756,54 +808,76 @@ export default function FlashcardGame() {
                       </CardDescription>
                     </CardHeader>
 
-                    <CardContent className="space-y-6 pt-4">
+                    <CardContent className={`space-y-6 ${viewMode === "mobile" ? "pt-2 px-3" : "pt-4"}`}>
                       <div className="space-y-4">
                         <div className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-sm">
                           <h3 className="font-medium text-lg text-violet-800 dark:text-violet-300 mb-2">Definition:</h3>
-                          <p className="text-xl">{filteredWords[currentWordIndex]?.definition || ""}</p>
+                          <p className={viewMode === "mobile" ? "text-base" : "text-xl"}>
+                            {filteredWords[currentWordIndex]?.definition || ""}
+                          </p>
                         </div>
 
                         <div className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-sm">
                           <h3 className="font-medium text-lg text-indigo-800 dark:text-indigo-300 mb-2">Example:</h3>
-                          <p className="text-lg italic">{filteredWords[currentWordIndex]?.example || ""}</p>
+                          <p className={`italic ${viewMode === "mobile" ? "text-base" : "text-lg"}`}>
+                            {filteredWords[currentWordIndex]?.example || ""}
+                          </p>
                         </div>
                       </div>
                     </CardContent>
 
-                    <CardFooter className="flex justify-between pt-2 pb-6">
+                    <CardFooter
+                      className={`flex justify-between ${viewMode === "mobile" ? "pt-2 pb-4 px-3 flex-col gap-2" : "pt-2 pb-6"}`}
+                    >
                       <Button
                         onClick={() => navigateLearnMode("prev")}
                         disabled={currentWordIndex === 0}
                         variant="outline"
-                        className="border-violet-200 text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-400 dark:hover:bg-violet-900/30"
+                        className={`border-violet-200 text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-400 dark:hover:bg-violet-900/30 ${viewMode === "mobile" ? "w-full" : ""}`}
                       >
                         <ChevronLeft className="mr-2 h-4 w-4" /> Previous
                       </Button>
 
-                      <Button
-                        onClick={() => {
-                          setShowTestSelector(true)
-                          setActiveTab("test")
-                        }}
-                        className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 dark:from-violet-700 dark:to-indigo-700"
-                      >
-                        <Brain className="mr-2 h-4 w-4" /> Take a Test
-                      </Button>
+                      {viewMode === "desktop" && (
+                        <Button
+                          onClick={() => {
+                            setShowTestSelector(true)
+                            setActiveTab("test")
+                          }}
+                          className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 dark:from-violet-700 dark:to-indigo-700"
+                        >
+                          <Brain className="mr-2 h-4 w-4" /> Take a Test
+                        </Button>
+                      )}
 
                       <Button
                         onClick={() => navigateLearnMode("next")}
                         disabled={currentWordIndex === filteredWords.length - 1}
                         variant="outline"
-                        className="border-violet-200 text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-400 dark:hover:bg-violet-900/30"
+                        className={`border-violet-200 text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-400 dark:hover:bg-violet-900/30 ${viewMode === "mobile" ? "w-full" : ""}`}
                       >
                         Next <ChevronRight className="ml-2 h-4 w-4" />
                       </Button>
+
+                      {viewMode === "mobile" && (
+                        <Button
+                          onClick={() => {
+                            setShowTestSelector(true)
+                            setActiveTab("test")
+                          }}
+                          className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 dark:from-violet-700 dark:to-indigo-700"
+                        >
+                          <Brain className="mr-2 h-4 w-4" /> Take a Test
+                        </Button>
+                      )}
                     </CardFooter>
                   </Card>
                 </div>
                 <div className="card-face card-back">
-                  <Card className="shadow-xl border-0 overflow-hidden bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-950 dark:to-violet-950 dark:border-indigo-800">
-                    <CardHeader className="pb-2 relative">
+                  <Card
+                    className={`shadow-xl border-0 overflow-hidden bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-950 dark:to-violet-950 dark:border-indigo-800 ${viewMode === "mobile" ? "mobile-card" : ""}`}
+                  >
+                    <CardHeader className={`pb-2 relative ${viewMode === "mobile" ? "px-3 py-3" : ""}`}>
                       <div className="flex justify-between items-center">
                         <Badge variant="outline" className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm">
                           {filteredWords[currentWordIndex]?.category || ""}
@@ -813,11 +887,15 @@ export default function FlashcardGame() {
                         </Badge>
                       </div>
                       <div className="flex justify-between items-center mt-4">
-                        <CardTitle className="text-4xl font-bold bg-gradient-to-r from-indigo-700 to-violet-700 dark:from-indigo-400 dark:to-violet-400 text-transparent bg-clip-text">
+                        <CardTitle
+                          className={`font-bold bg-gradient-to-r from-indigo-700 to-violet-700 dark:from-indigo-400 dark:to-violet-400 text-transparent bg-clip-text ${viewMode === "mobile" ? "text-xl" : "text-4xl"}`}
+                        >
                           {filteredWords[currentWordIndex]?.definition || ""}
                         </CardTitle>
                       </div>
-                      <CardDescription className="text-lg mt-2 flex items-center">
+                      <CardDescription
+                        className={`mt-2 flex items-center ${viewMode === "mobile" ? "text-sm" : "text-lg"}`}
+                      >
                         <span>Definition Card</span>
                         <Button
                           variant="ghost"
@@ -830,48 +908,68 @@ export default function FlashcardGame() {
                       </CardDescription>
                     </CardHeader>
 
-                    <CardContent className="space-y-6 pt-4">
+                    <CardContent className={`space-y-6 ${viewMode === "mobile" ? "pt-2 px-3" : "pt-4"}`}>
                       <div className="space-y-4">
                         <div className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-sm">
                           <h3 className="font-medium text-lg text-indigo-800 dark:text-indigo-300 mb-2">Word:</h3>
-                          <p className="text-xl">{filteredWords[currentWordIndex]?.word || ""}</p>
+                          <p className={viewMode === "mobile" ? "text-base" : "text-xl"}>
+                            {filteredWords[currentWordIndex]?.word || ""}
+                          </p>
                         </div>
 
                         <div className="bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-sm">
                           <h3 className="font-medium text-lg text-violet-800 dark:text-violet-300 mb-2">Example:</h3>
-                          <p className="text-lg italic">{filteredWords[currentWordIndex]?.example || ""}</p>
+                          <p className={`italic ${viewMode === "mobile" ? "text-base" : "text-lg"}`}>
+                            {filteredWords[currentWordIndex]?.example || ""}
+                          </p>
                         </div>
                       </div>
                     </CardContent>
 
-                    <CardFooter className="flex justify-between pt-2 pb-6">
+                    <CardFooter
+                      className={`flex justify-between ${viewMode === "mobile" ? "pt-2 pb-4 px-3 flex-col gap-2" : "pt-2 pb-6"}`}
+                    >
                       <Button
                         onClick={() => navigateLearnMode("prev")}
                         disabled={currentWordIndex === 0}
                         variant="outline"
-                        className="border-indigo-200 text-indigo-700 hover:bg-indigo-50 dark:border-indigo-800 dark:text-indigo-400 dark:hover:bg-indigo-900/30"
+                        className={`border-indigo-200 text-indigo-700 hover:bg-indigo-50 dark:border-indigo-800 dark:text-indigo-400 dark:hover:bg-indigo-900/30 ${viewMode === "mobile" ? "w-full" : ""}`}
                       >
                         <ChevronLeft className="mr-2 h-4 w-4" /> Previous
                       </Button>
 
-                      <Button
-                        onClick={() => {
-                          setShowTestSelector(true)
-                          setActiveTab("test")
-                        }}
-                        className="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 dark:from-indigo-700 dark:to-violet-700"
-                      >
-                        <Brain className="mr-2 h-4 w-4" /> Take a Test
-                      </Button>
+                      {viewMode === "desktop" && (
+                        <Button
+                          onClick={() => {
+                            setShowTestSelector(true)
+                            setActiveTab("test")
+                          }}
+                          className="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 dark:from-indigo-700 dark:to-violet-700"
+                        >
+                          <Brain className="mr-2 h-4 w-4" /> Take a Test
+                        </Button>
+                      )}
 
                       <Button
                         onClick={() => navigateLearnMode("next")}
                         disabled={currentWordIndex === filteredWords.length - 1}
                         variant="outline"
-                        className="border-indigo-200 text-indigo-700 hover:bg-indigo-50 dark:border-indigo-800 dark:text-indigo-400 dark:hover:bg-indigo-900/30"
+                        className={`border-indigo-200 text-indigo-700 hover:bg-indigo-50 dark:border-indigo-800 dark:text-indigo-400 dark:hover:bg-indigo-900/30 ${viewMode === "mobile" ? "w-full" : ""}`}
                       >
                         Next <ChevronRight className="ml-2 h-4 w-4" />
                       </Button>
+
+                      {viewMode === "mobile" && (
+                        <Button
+                          onClick={() => {
+                            setShowTestSelector(true)
+                            setActiveTab("test")
+                          }}
+                          className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 dark:from-indigo-700 dark:to-violet-700"
+                        >
+                          <Brain className="mr-2 h-4 w-4" /> Take a Test
+                        </Button>
+                      )}
                     </CardFooter>
                   </Card>
                 </div>
